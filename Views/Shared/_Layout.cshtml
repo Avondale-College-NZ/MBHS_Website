@@ -10,15 +10,22 @@
 </head>
 <body>
     <header>
-        <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: Times New Roman, Times, serif; text-shadow: 1px 1px 10px grey; font-size: 20px"><div class="row"><img class="col-sm-6" src="~/lib/images/MBHS logo.png" style="max-width:100px ;"><div class="col-sm-6" style="padding:0;"><p style="margin-top:10%; padding:0; display: flex; justify-content:center ">Marist Brothers'</p><p style="margin:0; padding:0; display:flex; justify-content:center">High School</p></div></div></a>
+        <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom shadow-sm mb-2" style="background-color:#e7f9ff;">
+            <div class="container-fluid" >
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: Times New Roman, Times, serif; text-shadow: 1px 1px 15px grey; font-size: 150%">
+                    <div class="row"><img class="col-6" src="~/lib/images/MBHS logo.png" style="max-width:100px;">
+                        <div class="col-6" style="padding:0;">
+                            <p style="margin-top:10%; margin-bottom:0; padding:0; display: flex; justify-content:center ">Marist Brothers'</p>
+                            <p style="margin:0; padding:0; display:flex; justify-content:center">High School</p>
+                        </div>
+                    </div>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" >
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
