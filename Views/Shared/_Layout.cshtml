@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom shadow-sm mb-2" style="background-color:#e7f9ff;">
+        <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light   " style="background-color:#e7f9ff; border: 5px double black">
             <div class="container-fluid" >
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: Times New Roman, Times, serif; text-shadow: 1px 1px 15px grey; font-size: 150%">
                     <div class="row"><img class="col-6" src="~/lib/images/MBHS logo.png" style="max-width:100px;">
@@ -37,8 +37,8 @@
             </div>
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid m-0 p-0">
+        <main role="main" class="m-0">
             @RenderBody()
         </main>
     </div>
