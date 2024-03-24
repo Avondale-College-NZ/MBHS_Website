@@ -2,14 +2,166 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .wrapper {
+        position: absolute;
+    }
+
+
+
+        .wrapper p {
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+            text-align: justify;
+            font-size: max(1vw, 15px);
+            font-family: sans-serif;
+            margin: 0;
+            color: white;
+        }
+
+    .shape {
+        width: 50%;
+        height: 100%;
+    }
+
+    .left {
+        transform: translate(-50%, -50%);
+        shape-outside: polygon(0% 0%, 45% 0%, 25% 10%, 15% 20%, 10% 30%, 7% 40%, 6% 50%, 7% 60%, 10% 70%, 15% 80%, 25% 90%, 45% 100%, 0% 100%);
+        float: left;
+    }
+
+    .right {
+        transform: translate(-50%, -50%);
+        shape-outside: polygon(100% 0%, 55% 0%, 75% 10%, 85% 20%, 90% 30%, 93% 40%, 94% 50%, 93% 60%, 90% 70%, 85% 80%, 75% 90%, 55% 100%, 100% 100%);
+        float: right;
+    }
+
+</style>
 <div class="container-fluid p-0" style="position: relative;
-background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('https://thepigeonpress.org/wp-content/uploads/2021/02/IDEA-1-1024x512.jpg'); height:100vh;background-size:cover; background-repeat: no-repeat;">
-    
-    <img src="~/lib/Images/MBHS logo.png" style="margin:auto; display:block; height: 40vh;   position: absolute;
+background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('https://thepigeonpress.org/wp-content/uploads/2021/02/IDEA-1-1024x512.jpg'); height:140vh;background-size:cover; background-repeat: no-repeat;">
+
+    <img src="~/lib/Images/MBHS logo.png" style=" max-height: 40vh;   position: absolute;
+    max-width:40vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);" />
-   
+    <div class="wrapper" style="  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(34vw, 250px);
+  height: 20vh;">
+        <p style="font-family:'Times New Roman'; font-weight:600; text-align:center; font-size: 2vw; ">
+            IN HOC SIGNO VINCES
+        </p>
 
-    
+        <div class="shape left"></div>
+        <div class="shape right"></div>
+
+        <br />
+        <br />
+        <p>
+            {“In this sign thou shall conquer’’)
+            The sign- the Cross- surmounts our shield.
+            The challenging motto of Constantine, the
+            first Christian Roman Emperor, indicates
+            the inspiration of the work of the
+            Marist Brothers’ and of the High
+            School. lt is at one time the
+            symbol of love, service and
+            sacrifice, which is held
+            up to all as the ideal
+            of human activity.
+
+        </p>
+    </div>
+
+    <div class="wrapper" style=" top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  width: max(34vw, 250px);
+  height: 20vh;">
+        <p style="font-family:'Times New Roman'; font-weight:600; text-align:center; font-size: 2vw;  ">
+            IN HOC SIGNO VINCES
+        </p>
+
+        <div class="shape left"></div>
+        <div class="shape right"></div>
+
+        <br />
+        <br />
+        <p>
+            {“In this sign thou shall conquer’’)
+            The sign- the Cross- surmounts our shield.
+            The challenging motto of Constantine, the
+            first Christian Roman Emperor, indicates
+            the inspiration of the work of the
+            Marist Brothers’ and of the High
+            School. lt is at one time the
+            symbol of love, service and
+            sacrifice, which is held
+            up to all as the ideal
+            of human activity.
+
+        </p>
+    </div>
+    <div class="wrapper" style=" top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max(34vw, 250px);
+  height: 20vh;">
+        <p style="font-family:'Times New Roman'; font-weight:600; text-align:center; font-size: 2vw;  ">
+            IN HOC SIGNO VINCES
+        </p>
+
+        <div class="shape left"></div>
+        <div class="shape right"></div>
+
+        <br />
+        <br />
+        <p>
+            {“In this sign thou shall conquer’’)
+            The sign- the Cross- surmounts our shield.
+            The challenging motto of Constantine, the
+            first Christian Roman Emperor, indicates
+            the inspiration of the work of the
+            Marist Brothers’ and of the High
+            School. lt is at one time the
+            symbol of love, service and
+            sacrifice, which is held
+            up to all as the ideal
+            of human activity.
+
+        </p>
+    </div>
+    <div class="wrapper" style=" top: 50%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  width: max(34vw, 250px);
+  height: 20vh;">
+        <p style="font-family:'Times New Roman'; font-weight:600; text-align:center; font-size: 2vw;  ">
+            IN HOC SIGNO VINCES
+        </p>
+
+        <div class="shape left"></div>
+        <div class="shape right"></div>
+
+        <br />
+        <br />
+        <p>
+            {“In this sign thou shall conquer’’)
+            The sign- the Cross- surmounts our shield.
+            The challenging motto of Constantine, the
+            first Christian Roman Emperor, indicates
+            the inspiration of the work of the
+            Marist Brothers’ and of the High
+            School. lt is at one time the
+            symbol of love, service and
+            sacrifice, which is held
+            up to all as the ideal
+            of human activity.
+
+        </p>
+    </div>
+
 </div>
