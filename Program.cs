@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using MBHS_Website.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("MBHS_ContextConnection") ?? throw new InvalidOperationException("Connection string 'MBHS_ContextConnection' not found.");
+
+builder.Services.AddDbContext<MBHS_Context>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<MBHS_WebsiteUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MBHS_Context>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,6 +27,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
