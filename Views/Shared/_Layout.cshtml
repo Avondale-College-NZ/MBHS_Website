@@ -12,85 +12,137 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MBHS_Website.styles.css" asp-append-version="true" />
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.collapsible-menu').addEventListener('click', function () {
+                document.querySelectorAll('.nav-links').forEach(function (navLinks) {
+                    navLinks.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        header {
+            background-color: #f2f2f2; /* Light grey background */
+            color: #00205b; /* Dark blue for text color */
+            box-shadow: 1px 1px 25px 1px black;
+            opacity: 95%;
+            border: 2px solid #00205b;
+        }
+
+        .holder {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20px;
+        }
+
+        .logo img {
+            max-width: 60px;
+        }
+
+        .collapsible-menu {
+            display: none; /* Hide the toggle button by default */
+            cursor: pointer;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+            .nav-links li {
+                margin-right: 20px;
+            }
+
+                .nav-links li a {
+                    color: #00205b; /* Dark blue */
+                    text-decoration: none;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    padding: 8px 15px;
+                    border-radius: 5px;
+                    transition: color 0.3s ease;
+                }
+
+                    .nav-links li a:hover {
+                        color: #ed2939; /* Subtle red on hover */
+                        border-bottom: 2px solid #ed2939; /* Subtle red underline on hover */
+                    }
+
+        .logo-container {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+            .logo-container img {
+                grid-row: 1/ span 2;
+            }
+
+            .logo-container p {
+                margin-left: 10px;
+            }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        @@media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column; /* Display the navigation links vertically */
+                align-items: flex-start; /* Align navigation links to the left */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #fff;
+                width: 100%;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                padding:10%;
+                z-index: 1000;
+                padding: 20px 0; /* Added padding for better spacing */
+            }
+
+                .nav-links.active {
+                    display: flex; /* Show the navigation links when the menu is toggled */
+                }
+
+                .nav-links li {
+                    margin-right: 0;
+                    width: 100%;
+                    margin-bottom:10px;
+                  
+
+                }
+
+                .nav-links:nth-of-type(2)  {
+                    margin-top: 100px; /* Add margin to separate from the first set of links */
+                }
+
+
+            .collapsible-menu {
+                display: block; /* Display the toggle button on smaller screens */
+            }
+
+                .collapsible-menu:hover {
+                    color: #ed2939; /* Change color on hover to subtle red */
+                }
+        }
+
+    </style>
 </head>
-<style>
-body {
-    margin: 0;
-    padding:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
-header {
-    background-color: #f2f2f2; /* Light grey background */
-    color: #00205b; /* Dark blue for text color */
-    box-shadow: 1px 1px 25px 1px black;
-    opacity: 95%;
-        border: 2px solid #00205b;
-        
-    
-}
-.holder {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
-   
-}
 
-.logo img {
-max-width: 60px;
-}
-
-.collapsible-menu {
-    display: none; /* Hide the toggle button by default */
-    cursor: pointer;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li {
-    margin-right: 20px;
-}
-
-.nav-links li a {
-    color: #00205b; /* Dark blue */
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-    color: #ed2939; /* Subtle red on hover */
-    border-bottom: 2px solid #ed2939; /* Subtle red underline on hover */
-}
-.logo-container {
-        display: grid;
-        grid-template-columns: auto auto;
-        
-        
-}
-.logo-container img{
-   grid-row: 1/ span 2;
-}
-
-.logo-container p {
-   margin-left: 10px;
-            
-}
-
-    a:link {
-        text-decoration: none;
-    }
-
-</style>
 <body >
     <header style=" position:sticky; position:-webkit-sticky; top:0px; z-index:999; ">
         <div class="holder">
