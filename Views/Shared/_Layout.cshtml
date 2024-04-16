@@ -1,4 +1,9 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@using MBHS_Website.Areas.Identity.Data
+
+@inject SignInManager<MBHS_WebsiteUser> SignInManager
+@inject UserManager<MBHS_WebsiteUser> UserManager
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,59 +14,130 @@
     <link rel="stylesheet" href="~/MBHS_Website.styles.css" asp-append-version="true" />
 </head>
 <style>
-    #navbar {
-        
-        border: white 5px 5px  5px;
-    }
-/*     #navbar {
-        padding:20px;
-         border-bottom: 18px solid transparent;
-        border-image: url('images\\fiji navbar border.png') 50 round;
-    }
-    #navbar :after{
+body {
+    margin: 0;
+    padding:0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-       
-        shadow: 
-        opacity: 0.1;
-        margin-bottom: 0;
+header {
+    background-color: #f2f2f2; /* Light grey background */
+    color: #00205b; /* Dark blue for text color */
+    box-shadow: 1px 1px 25px 1px black;
+    opacity: 95%;
+        border: 2px solid #00205b;
+        
     
-    } */
+}
+.holder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+   
+}
+
+.logo img {
+max-width: 60px;
+}
+
+.collapsible-menu {
+    display: none; /* Hide the toggle button by default */
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links li a {
+    color: #00205b; /* Dark blue */
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #ed2939; /* Subtle red on hover */
+    border-bottom: 2px solid #ed2939; /* Subtle red underline on hover */
+}
+.logo-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        
+        
+}
+.logo-container img{
+   grid-row: 1/ span 2;
+}
+
+.logo-container p {
+   margin-left: 10px;
+            
+}
+
+    a:link {
+        text-decoration: none;
+    }
+
 </style>
 <body >
-    <header style=" position:sticky; position:-webkit-sticky; top:0px; z-index: 999;  ">
-        <div id="navbar"class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light" style="background-color:#0864a4; box-shadow: 1px 1px 25px 1px black ; opacity:95% ;">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: Times New Roman, Times, serif; text-shadow: 1px 1px 15px grey; font-size: 150%; color: white;">
-                    <div class="row">
-                        <img class="col-6" src="~/Images/MBHS logo.png" style="max-width:100px;">
-                        <div class="col-6" style="padding:0;">
-                            <p style="margin-top:10%; margin-bottom:0; padding:0; display: flex; justify-content:center ">Marist Brothers'</p>
-                            <p style="margin:0; padding:0; display:flex; justify-content:center">High School</p>
-                        </div>
+    <header style=" position:sticky; position:-webkit-sticky; top:0px; z-index:999; ">
+        <div class="holder">
+            <div class="logo">
+                <a asp-area="" asp-controller="Home" asp-action="Index" style=" font-family:Arial, Helvetica, sans-serif; text-shadow: 4px 6px 6px rgba(150,150,150,0.8); font-size: 130%; color: black;">
+                    <div class="logo-container">
+                        <img  src="~/Images/MBHS logo.png" >
+                       
+                            <p class ="name-top"style="margin-top:0%; margin-bottom:0; padding-top:5%; display: flex; justify-content:center ">Marist Brothers'</p>
+                            <p class="name-bottom" style="margin-top: 0; padding:0; display:flex; justify-content:center">High School</p>
+                        
                     </div>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1" >
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </div>
+                <div class="collapsible-menu">&#9776;</div>
+                
+                    <ul class="nav-links">
+                        <li >
+                            <a  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li>
+                            <a  asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial.cshtml"/>
-                </div>
-            </div>
+            <ul class="nav-links">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li>
+                        <a id="manage"  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    </li>
+                    <li>
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit">Logout</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </li>
+                    <li>
+                        <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+            </ul>
+            
         </div>
     </header>
     <div class="container-fluid m-0 p-0">
