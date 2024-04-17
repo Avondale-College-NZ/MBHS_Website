@@ -73,18 +73,56 @@
                     padding: 8px 15px;
                     border-radius: 5px;
                     transition: color 0.3s ease;
+                    position: relative; /* Position relative for absolute positioning */
+                    overflow: hidden; /* Hide the overflow */
+
                 }
+
+                    .nav-links li a::before {
+                        content: ''; /* Create a pseudo-element for the border */
+                        position: absolute; /* Position absolutely */
+                        top: 0; /* Align to the top */
+                        left: 0; /* Align to the left */
+                        width: 100%; /* Full width */
+                        height: 0; /* Initially hidden */
+                        border-bottom: 2px solid #ed2939; /* Border color */
+                        opacity: 0; /* Initially transparent */
+                        transition: height 0.3s ease, opacity 0.3s ease; /* Transition height and opacity properties */
+                    }
+
+                    .nav-links li a:hover::before {
+                        height: 100%; /* Expand height on hover */
+                        opacity: 1; /* Increase opacity on hover */
+                    }
 
                     .nav-links li a:hover {
                         color: #ed2939; /* Subtle red on hover */
-                        border-bottom: 2px solid #ed2939; /* Subtle red underline on hover */
+                       
                     }
 
         .logo-container {
             display: grid;
             grid-template-columns: auto auto;
+            
+            
+        }
+        .title {
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 4px 6px 6px rgba(150,150,150,0.8);
+            background-image: linear-gradient(90deg, blue, red);
+            font-weight: 600;
+            font-size: 135%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            transition: 0.5s;
+        }
+        .title:hover {
+                text-shadow: -4px 6px 6px rgba(100,100,100,0.9);
         }
 
+
+}
             .logo-container img {
                 grid-row: 1/ span 2;
             }
@@ -147,13 +185,13 @@
     <header style=" position:sticky; position:-webkit-sticky; top:0px; z-index:999; ">
         <div class="holder">
             <div class="logo">
-                <a asp-area="" asp-controller="Home" asp-action="Index" style=" font-family:Arial, Helvetica, sans-serif; text-shadow: 4px 6px 6px rgba(150,150,150,0.8); font-size: 130%; color: black;">
-                    <div class="logo-container">
+                <a asp-area="" asp-controller="Home" asp-action="Index" >
+                    <div class="logo-container" >
                         <img  src="~/Images/MBHS logo.png" >
-                       
+                       <div class="title">
                             <p class ="name-top"style="margin-top:0%; margin-bottom:0; padding-top:5%; display: flex; justify-content:center ">Marist Brothers'</p>
                             <p class="name-bottom" style="margin-top: 0; padding:0; display:flex; justify-content:center">High School</p>
-                        
+                        </div>
                     </div>
                 </a>
             </div>
