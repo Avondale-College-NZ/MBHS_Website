@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MBHS_Website.styles.css" asp-append-version="true" />
-    <script>
+    <script src="https://kit.fontawesome.com/a8c6681344.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script>    
 
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.collapsible-menu').addEventListener('click', function () {
@@ -20,6 +24,23 @@
                     navLinks.classList.toggle('active');
                 });
             });
+        
+
+        gsap.set('.footer-container', { yPercent: -50 })
+
+        const uncover = gsap.timeline({ paused: true })
+
+        uncover
+            .to('.footer-container', { yPercent: 0, ease: 'none' })
+            ;
+
+        ScrollTrigger.create({
+            trigger:  '.body-container',
+            start: 'bottom bottom',
+            end: '+=18%',
+            animation: uncover,
+            scrub: true,
+        });
         });
     </script>
 
@@ -109,7 +130,7 @@
         .title {
             font-family: Arial, Helvetica, sans-serif;
             text-shadow: 4px 6px 6px rgba(150,150,150,0.8);
-            background-image: linear-gradient(90deg, blue, red);
+            background-image: linear-gradient(90deg, darkblue, darkred);
             font-weight: 600;
             font-size: 135%;
             color: transparent;
@@ -177,6 +198,128 @@
                 }
         }
 
+        .footer-section {
+            padding: 40px 0;
+            background: #151414;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #666;
+        }
+
+        .footer-content h5 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+            .footer-content p:last-child {
+                margin-bottom: 20px;
+            }
+
+        .divider {
+            border-top: 1px solid #666;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .footer-container {
+            display:grid;
+            grid-template-areas:
+                'address-logo address address logo logo logo'
+                'email-logo email email logo logo logo'
+                'phone-logo phone phone motto motto motto'
+                'copyright-label copyright-label copyright-label copyright-label copyright-label copyright-label';
+            
+            background: #151414;
+            color: white;
+            
+        }
+
+            .footer-container div {
+                padding: 5px;
+            }
+
+            i {
+            color:#ff5e14;
+            }
+
+        .copyright-label a, .quotation-marks{
+            color: #ff5e14 !important; 
+        }
+            .logo, .motto, .copyright-label {
+                text-align: center;
+            }
+
+            .address, .email, .phone {
+            border-right: 1px solid #373636;
+            
+            }
+
+        .address-logo, .email-logo, .phone-logo {
+            text-align:end;
+
+        }
+
+        .address-logo{
+            margin-top: 20px;
+            grid-area: address-logo;
+            
+        }
+        .copyright-label {
+            color: #878787;
+            background: #202020;
+        }
+
+        .email-logo{
+            grid-area: email-logo;
+        }
+
+        .phone-logo{
+            grid-area: phone-logo;
+        }
+        .address{
+            grid-area: address;
+            margin-top: 20px;
+        }
+        .email{
+            grid-area: email;
+        }
+        .phone{
+            grid-area: phone;
+            margin-bottom: 20px;
+        }
+
+            .footer-container a {
+            color: white;
+            transition: 0.5s ease;
+        }
+
+
+
+            .footer-container a:hover {
+            color: #ff5e14;
+            }
+
+        .logo{
+            grid-area: logo;
+        }
+        .motto{
+            grid-area: motto;
+            font-family: 'Baskerville';
+            font-size: 18px;
+        }
+
+        .copyright-label{
+            grid-area: copyright-label;
+        }
+        footer {
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -201,6 +344,9 @@
                         <li >
                             <a  asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                </li>
                         <li>
                             <a  asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -230,17 +376,46 @@
             
         </div>
     </header>
+    <div class="body-container">
     <div class="container-fluid m-0 p-0">
         <main role="main" class="m-0">
             @RenderBody()
         </main>
-    </div>
+    </div></div>
 
-    <footer class="border-top footer text-muted" >
-        <div class="container">
-            &copy; 2024 - MBHS_Website - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer @* class="footer-section" *@ >
+@*        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer-content text-center">
+                        <h5>Contact Us</h5>
+                        <p>Marist Brothers High School</p>
+                        <p>Suva, Fiji</p>
+                        <p>Email: info@mbhs.edu.fj</p>
+                        <p>Phone: +679 123 4567</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <hr class="divider">
+                    <p>&copy; 2024 Marist Brothers High School. All rights reserved.</p>
+                </div>
+            </div>
+        </div>*@
+        <div class="footer-container">
+            <div class="address-logo"><i class=" fas fa-map-marker-alt"></i></div>
+            <div class="email-logo"><i class=" far fa-envelope-open"></i></div>
+            <div class="phone-logo"><i class=" fas fa-phone"></i></div>
+            <div class="address"><a href="https://www.google.com/maps/dir//VC3P%2B97G,+Carew+St,+Suva,+Fiji/@@-18.1465413,178.3532962,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x6e1bdc2dd8878c89:0x1b6179482fab9931!2m2!1d178.4356979!2d-18.1465588?entry=ttu" target="_blank">VC3P+97G, Carew St, Suva, Fiji</a></div>
+            <div class="email"><a href="mailto:office@mbhs.avcol.school.fiji">office@@mbhs.school.fiji</a></div>
+            <div class="phone"><a href="tel:+679123456789">+679 123 456 789</a></div>
+            <div class="logo"> <img src="~/Images/MBHS logo.png" /></div>
+            <div class="motto"><span class="quotation-marks">"</span> IN HOC SIGNO VINCES <span class="quotation-marks">"</span></div>
+            <div class="copyright-label">&copy; 2024 Marist Brothers High School. All rights reserved. <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
