@@ -3,6 +3,20 @@
 }
 
 <style>
+    .home-container p {
+  animation: 0.5s fade-up-enter;
+}
+
+@@keyframes fade-up-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
     .wrapper {
         position: absolute;
     }
@@ -38,7 +52,7 @@
     }
 
 </style>
-<div class="container-fluid p-0" style="position: relative;
+<div class=" home-container container-fluid p-0" style="position: relative;
 background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('https://www.fijitimes.com.fj/wp-content/uploads/2022/08/Marist-athletes.jpg'); height:140vh;background-size:cover; background-repeat: no-repeat;
 ">
 
