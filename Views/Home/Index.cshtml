@@ -5,8 +5,20 @@
 <style>
     .home-container p {
   animation: 0.5s fade-up-enter;
+
 }
 
+
+    .wrapper {
+        width: 500%;
+        margin-bottom: 20px; /* Add some spacing between components */
+    }
+
+    .shape {
+        width: 100%;
+        float: none;
+    }
+}
 @@keyframes fade-up-enter {
   0% {
     opacity: 0;
@@ -21,20 +33,17 @@
         position: absolute;
     }
 
-
-
-    .shape {
+    .shape-left {
         width: 50%;
         height: 100%;
-    }
-
-    .left {
         transform: translate(-50%, -50%);
         shape-outside: polygon(0% 0%, 45% 0%, 25% 10%, 15% 20%, 10% 30%, 7% 40%, 6% 50%, 7% 60%, 10% 70%, 15% 80%, 25% 90%, 45% 100%, 0% 100%);
         float: left;
     }
 
-    .right {
+    .shape-right {
+        width: 50%;
+        height: 100%;
         transform: translate(-50%, -50%);
         shape-outside: polygon(100% 0%, 55% 0%, 75% 10%, 85% 20%, 90% 30%, 93% 40%, 94% 50%, 93% 60%, 90% 70%, 85% 80%, 75% 90%, 55% 100%, 100% 100%);
         float: right;
@@ -56,27 +65,76 @@
         margin: 0;
         color: white;
     }
+    .top{
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 975px;
+        height: 124px;
+    }
+    .bottom {
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -47.5%);
+        width: 975px;
+        height: 131px;
+    }
+    .left{
+        top: 50%;
+        left: 20%;
+        transform: translate(-50%, -52.5%);
+        width: 400px;
+        height: 170px;
+    }
+    .right{
+        top: 50%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 215px;
+    }
+    .home-logo{
+        height: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    @@media screen and (max-width: 1000px) {
+            .home-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .wrapper, .home-logo {
+                
+                margin-bottom: 50px; /* Add some spacing between components */
+                position:relative;
+                top:auto;
+                left:auto;
+                transform: translate(0%, 0%);
+            }
+            .description {
+                margin-bottom: 50px;
+            }
+            .shape {
+                width: 100%;
+                float: none;
+            }
+        }
 </style>
 <div class=" home-container container-fluid p-0" style="position: relative;
 background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('https://www.fijitimes.com.fj/wp-content/uploads/2022/08/Marist-athletes.jpg'); height:1400px;background-size:cover; background-repeat: no-repeat;
 ">
 
-    <img src="~/Images/MBHS logo.png" style="height: 400px;   position: absolute;
-  
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);" />
-    <div class="wrapper" style="  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 975px;
-  height: 124px;">
+    <img class="home-logo"src="~/Images/MBHS logo.png" />
+    <div class="wrapper top" >
         <p class="heading">
             IN HOC SIGNO VINCES
         </p>
 
-        <div class="shape left"></div>
-        <div class="shape right"></div>
+        <div class="shape-left"></div>
+        <div class="shape-right"></div>
 
       
         <br />
@@ -96,17 +154,13 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('h
         </p>
     </div>
 
-    <div class="wrapper" style=" top: 50%;
-  left: 20%;
-  transform: translate(-50%, -52.5%);
-  width: 400px;
-  height: 170px;">
+    <div class="wrapper left" >
         <p class="heading">
             THE LAMP AND SCROLL
         </p>
 
-        <div class="shape left"></div>
-        <div class="shape right"></div>
+        <div class="shape-left"></div>
+        <div class="shape-right"></div>
 
       
         <br />
@@ -117,17 +171,13 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('h
         </p>
     </div>
    
-    <div class="wrapper" style=" top: 50%;
-  left: 80%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 215px;">
+    <div class="wrapper right" >
         <p class="heading">
             THE TAKIA
         </p>
 
-        <div class="shape left"></div>
-        <div class="shape right"></div>
+        <div class="shape-left"></div>
+        <div class="shape-right"></div>
 
      
         <br />
@@ -145,17 +195,13 @@ background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('h
 
         </p>
     </div>
-    <div class="wrapper" style=" top: 80%;
-  left: 50%;
-  transform: translate(-50%, -47.5%);
-  width: 975px;
-  height: 131px;">
+    <div class="wrapper bottom" >
         <p class="heading">
             “IN THIS SIGN THOU SHALL CONQUER’’
         </p>
 
-        <div class="shape left"></div>
-        <div class="shape right"></div>
+        <div class="shape-left"></div>
+        <div class="shape-right"></div>
 
     
         <br />
