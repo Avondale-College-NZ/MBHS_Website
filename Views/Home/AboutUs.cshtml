@@ -2,6 +2,68 @@
 @{
     ViewData["Title"] = "AboutUs";
 }
+<style>
 
-<h1>AboutUs</h1>
+
+
+    .about-us-container {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: black;
+           }
+
+    main {
+        padding: 2.5%;
+        max-width: 1200px;
+        margin:auto;
+        background-color: white;
+        min-height: 90vh;
+        border-radius: 20px;
+        position:relative;
+        top:-20px;
+    }
+
+
+    section {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: black;
+        font-weight: 500;
+    }
+
+    main p {
+        color: black; /* Adjust text color as needed */
+        font-family: "Noto Sans",sans-serif;
+    }
+
+        }
+    .top-img {
+        width:100vw;
+        height: 300px;
+        filter: brightness(.8);
+        object-fit: cover;
+    }
+</style>
+<body class="about-us-container">
+    <img class ="top-img"src="~/images/mbhs pic.png" />
+    <main>
+        <section id="intro">
+            <h2>Welcome to Marist Brothers High School</h2>
+            <p>Insert your introduction text here...</p>
+        </section>
+        <section id="history">
+            <h2>Our History</h2>
+
+                <p>Insert your history text here... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut lectus justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            </div>
+        </section>
+        <!-- Add more sections as needed -->
+    </main>
+</body>
+
+
 
