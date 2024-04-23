@@ -14,10 +14,7 @@
         margin-bottom: 20px; /* Add some spacing between components */
     }
 
-    .shape {
-        width: 100%;
-        float: none;
-    }
+
 }
 @@keyframes fade-up-enter {
   0% {
@@ -83,15 +80,15 @@
         top: 50%;
         left: 20%;
         transform: translate(-50%, -52.5%);
-        width: 400px;
-        height: 170px;
+        width: 500px;
+        height: 145px;
     }
     .right{
         top: 50%;
         left: 80%;
         transform: translate(-50%, -50%);
-        width: 400px;
-        height: 215px;
+        width: 500px;
+        height: 190px;
     }
     .home-logo{
         height: 400px;
@@ -100,11 +97,12 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    @@media screen and (max-width: 1000px) {
+    @@media screen and (max-width: 1150px) {
             .home-container {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
+                
             }
             .wrapper, .home-logo {
                 
@@ -113,18 +111,20 @@
                 top:auto;
                 left:auto;
                 transform: translate(0%, 0%);
+            
             }
-            .description {
-                margin-bottom: 50px;
+            .heading{
+                font-size: 28px;
             }
-            .shape {
-                width: 100%;
-                float: none;
-            }
+
+        .description {
+            font-size:16px;
+        }
+
         }
 </style>
 <div class=" home-container container-fluid p-0" style="position: relative;
-background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('https://www.fijitimes.com.fj/wp-content/uploads/2022/08/Marist-athletes.jpg'); height:1400px;background-size:cover; background-repeat: no-repeat;
+background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('https://www.fijitimes.com.fj/wp-content/uploads/2022/08/Marist-athletes.jpg'); height:1450px;background-size:cover; background-repeat: no-repeat;
 ">
 
     <img class="home-logo"src="~/Images/MBHS logo.png" />
