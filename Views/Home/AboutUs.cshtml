@@ -17,7 +17,7 @@
     main {
         color: black;
         font-family: Arial, sans-serif;
-        padding: 2.5%;
+        padding: 5%;
         max-width: 1200px;
         margin:auto;
         background-color: white;
@@ -25,11 +25,12 @@
         border-radius: 20px;
         position:relative;
         top:-20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
 
     section {
-        margin-bottom: 20px;
+        padding:5% 0 5% 0;
     }
 
     h2 {
@@ -48,23 +49,87 @@
         height: 300px;
         filter: brightness(.8);
         object-fit: cover;
+        object-position:30% 40%;
     }
-    .intro {
-
+    section {
+        border-bottom: 0.5px solid #373636;
+    }
+    .ending {
+        padding: 5% 0 0 0;
+    }
+    section img {
+        border-radius: 5px;
+        margin: 15px;
     }
 </style>
 <body class="about-us-container">
-    <img class ="top-img"src="~/images/mbhs pic.png" />
+    <img class ="top-img"src="~/images/mbhs pic2.jpg" />
     <main>
-        <section id="intro">
+        <section >
             <h2>Welcome to Marist Brothers High School</h2>
-            <p>Insert your introduction text here...</p>
+            <p>Suva, Fiji</p>
         </section>
-        <section id="history">
+        <section >
             <h2>Our History</h2>
+            <br />
+            <img src="~/images/marist borthers.jpeg" style="height:150px; float:left; "/>
+            <p>
+                The story of Marist Brothers' High School is one of dedication, vision, and commitment to educational excellence. Founded by the Marist Brothers, a Catholic religious order renowned for their contributions to education worldwide, our school began with a modest yet profound mission: to provide quality education grounded in faith, compassion, and academic rigor.
 
-                <p>Insert your history text here... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut lectus justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                Over the years, our institution has grown and evolved, adapting to the changing needs of our students and society while staying true to our founding principles. From our humble beginnings, we have emerged as a beacon of academic excellence and moral integrity in Fiji, shaping generations of leaders, scholars, and compassionate individuals.
+            </p>
         </section>
+        <section >
+            <h2>Our Mission and Values</h2>
+            <br />
+            
+            <p>
+                At Marist Brothers' High School, our mission is to provide a holistic education that nurtures the mind, body, and spirit of every student. Rooted in the teachings of Jesus Christ and the Marist tradition, our values guide everything we do:
+                <ul>
+                    <li>
+                        Excellence: We strive for excellence in all endeavors, encouraging our students to reach their highest potential academically, socially, and personally.
+                    </li>
+                                        <li>
+                        Integrity: We uphold the highest standards of honesty, respect, and ethical behavior, fostering a culture of trust and accountability within our school community.
+                    </li>
+                                        <li>
+                        Service: We believe in the importance of serving others and making a positive difference in the world. Through service projects, outreach initiatives, and community engagement, we instill in our students a sense of compassion, empathy, and social responsibility.
+                    </li>
+                    <li>
+                        Community: We foster a strong sense of belonging and camaraderie among students, staff, parents, and alumni, creating a supportive and inclusive community where everyone is valued and respected.
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section >
+            <h2>Beyond the Classroom</h2>
+            <br />
+            <p>
+                Education extends beyond the confines of the classroom at Marist Brothers' High School. We offer a wide range of extracurricular activities, clubs, and sports programs that provide students with opportunities for personal growth, leadership development, and social engagement.
+
+                From athletics to the arts, from debate to community service, there is something for everyone at our school. Through participation in these activities, students learn valuable life skills such as teamwork, communication, and time management, while also forming lasting friendships and memories.
+            </p>
+        </section>
+        <section >
+            <h2>Academic Excellence</h2>
+            <br />
+            <img src="~/images/mbhs classroom.jpg" style="float:right; height:150px;" />
+            <p>
+                At Marist Brothers' High School, we are committed to providing a rigorous and comprehensive academic program that prepares students for success in college, career, and life. Our dedicated faculty members are experts in their fields, passionate about teaching, and deeply invested in the success of every student.
+
+                From our challenging curriculum to our innovative teaching methods, we strive to inspire a love of learning and intellectual curiosity in our students. Whether pursuing advanced placement courses, participating in extracurricular activities, or engaging in independent research projects, our students are encouraged to explore their interests, develop critical thinking skills, and pursue their passions.
+            </p>
+        </section>
+        <section >
+            <h2>Our Alumni</h2>
+            <br />
+            <p>
+                The impact of Marist Brothers' High School extends far beyond the walls of our campus. Our alumni are leaders in their fields, making meaningful contributions to their communities and the world at large. From business and politics to science and the arts, our graduates are making a difference wherever they go.
+
+                We are proud of our alumni and the legacy they have created, and we are committed to maintaining strong connections with them through networking events, reunions, and ongoing support.
+            </p>
+        </section>
+        <h2 class="ending">We look forward to welcoming you into our community!</h2>
         <!-- Add more sections as needed -->
     </main>
 </body>
