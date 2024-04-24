@@ -2,6 +2,30 @@
 @{
     ViewData["Title"] = "AboutUs";
 }
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.set('main', { y: -20 })
+
+        const uncover = gsap.timeline({ paused: true })
+
+        uncover
+            .to('main', { y: -300, ease: 'none' })
+            ;
+
+        ScrollTrigger.create({
+            trigger: '.top-img',
+            start: 'top 100px',
+            end: '+=50%',
+            animation: uncover,
+            scrub: true,
+        });
+        
+    });
+    </script>
 <style>
 
 
@@ -12,7 +36,7 @@
         padding: 0;
         background: linear-gradient(135deg, rgba(219,222,233,1) 20%, rgba(233,221,221,1) 80%);
        
-           }
+     }
 
     main {
         animation: 0.5s up-enter;
@@ -25,8 +49,9 @@
         min-height: 90vh;
         border-radius: 20px;
         position:relative;
-        top:-20px;
+        margin-bottom:-280px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      
     }
 
     @@keyframes up-enter {
@@ -66,10 +91,11 @@
 
        
     .top-img {
-
+        position:relative;
+        top:0;
         max-width: 100%;
         width:100vw;
-        height: 300px;
+        height: 400px;
         filter: brightness(.9);
         object-fit: cover;
         object-position:30% 40%;
