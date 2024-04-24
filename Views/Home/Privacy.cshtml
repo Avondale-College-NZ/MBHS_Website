@@ -8,10 +8,11 @@
     .privacy-container {
         margin: 0;
         padding: 0;
-        background-color: #f4f4f4;
+        background: linear-gradient(135deg, rgba(219,222,233,1) 20%, rgba(233,221,221,1) 80%);
     }
 
     main {
+        animation: 0.5s up-enter;
         color: black;
         font-family: Arial, sans-serif;
         padding: 5%;
@@ -25,8 +26,31 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
+    @@keyframes up-enter {
+        0% {
+           
+            transform: translateY(20px);
+        }
 
+        100% {
+            
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fade-in {
+        0% {
+            opacity: 0;
+            
+        }
+
+        100% {
+            opacity: 1;
+            
+        }
+    }
     section {
+        animation: 0.5s fade-in;
         padding: 5% 0 5% 0;
     }
 
@@ -42,9 +66,10 @@
 
 
     .top-img {
+        max-width:100%;
         width: 100vw;
         height: 300px;
-        filter: brightness(.8);
+        filter: brightness(.9);
         object-fit: cover;
         object-position: 50% 45%;
     }
