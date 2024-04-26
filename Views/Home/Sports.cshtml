@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewData["Title"] = "Sports";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        gsap.set('main', { y: -20 })
+
+        const uncover = gsap.timeline({ paused: true })
+
+        uncover
+            .to('main', { y: -300, ease: 'none' })
+            ;
+
+        ScrollTrigger.create({
+            trigger: '.top-img',
+            start: 'top 100px',
+            end: '+=50%',
+            animation: uncover,
+            scrub: true,
+        });
+
+    });
+</script>
+<style>
+
+
+
+    .sports-container {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, rgba(219,222,233,1) 20%, rgba(233,221,221,1) 60%);
+    }
+
+    main {
+        animation: 0.5s up-enter;
+        color: black;
+        font-family: Arial, sans-serif;
+        padding: 5%;
+        max-width: 1200px;
+        margin: auto;
+        background-color: white;
+        min-height: 90vh;
+        border-radius: 20px;
+        position: relative;
+        margin-bottom: -280px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    @@keyframes up-enter {
+        0% {
+            transform: translateY(0px);
+        }
+
+        100% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @@keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    section {
+        animation: 0.5s fade-in;
+        padding: 5% 0 5% 0;
+    }
+
+    h2 {
+        color: black;
+        font-weight: 500;
+    }
+
+    main p {
+        color: black; /* Adjust text color as needed */
+        font-family: "Noto Sans",sans-serif;
+    }
+
+
+    .top-img {
+        position: relative;
+        top: 0;
+        max-width: 100%;
+        width: 100vw;
+        height: 400px;
+        filter: brightness(.9);
+        object-fit: cover;
+        object-position: 50% 5%;
+    }
+
+    section {
+        border-bottom: 0.5px solid #373636;
+    }
+
+    .ending {
+        padding: 6% 0 0 0;
+        color: #272727;
+        font-style: italic;
+        text-align: center;
+    }
+
+    section img {
+        border-radius: 5px;
+        margin: 15px;
+        margin-top:0;
+    }
+
+</style>
+<body class="sports-container">
+    <img class="top-img" src="~/images/mbhs pic3.jpg" />
+    <main>
+        <section>
+            <h2>Sports</h2>
+            <br />
+            <p>At Marist Brothers' High School, sports play an integral role in shaping well-rounded individuals and fostering a sense of camaraderie among students. With a diverse range of sporting activities available, students have the opportunity to discover and develop their athletic talents while embodying the values of teamwork, discipline, and sportsmanship.</p>
+        </section>
+        <section>
+            <h2>Rugby</h2>
+            <br />
+            <img src="~/images/MBHS pic4.jpg" style="height:150px; float:left; " />
+            <p>
+                Rugby holds a special place in the heart of Marist Brothers' High School. With a rich history of success on the rugby field, our school's rugby teams participate in various local and national tournaments, showcasing exceptional skill and sportsmanship. Under the guidance of experienced coaches, students receive top-notch training, allowing them to excel both individually and as a team.
+            </p>
+        </section>
+        <section>
+            <h2>Foottball</h2>
+            <br />
+
+            <p>
+                Football is immensely popular among students at Marist Brothers' High School. Our football teams compete at local, regional, and national levels, consistently delivering impressive performances on the field. Through regular practice sessions and friendly matches, students hone their technical abilities and tactical understanding, fostering a deep passion for the beautiful game.</ul>
+            </p>
+        </section>
+        <section>
+            <h2>Athletics</h2>
+            <br />
+            <img src="~/images/MBHS pic5.jpg" style="float:right; height:150px;" />
+            <p>
+                Athletics provide students with the opportunity to showcase their speed, agility, and endurance on the track and field. Marist Brothers' High School boasts a talented pool of athletes who excel in various track events, including sprints, middle-distance running, hurdles, and relays. With access to state-of-the-art facilities, our athletes receive comprehensive training to maximize their potential and achieve excellence in competitions.
+            </p>
+        </section>
+        <section>
+            <h2>Basketball</h2>
+            <br />
+            
+            <p>
+                Basketball is another popular sport at Marist Brothers' High School, attracting students with its fast-paced action and strategic gameplay. Our basketball teams participate in interschool tournaments, where they compete against other schools with determination and skill. Through regular practice sessions and friendly matches, students refine their dribbling, shooting, and defensive abilities, embodying the spirit of teamwork and sportsmanship on the court.
+            </p>
+        </section>
+        <section>
+            <h2>Volleyball</h2>
+            <br />
+            <img src="~/images/MBHS pic6.jpg" style="height:150px; float:left; " />
+            <p>
+                Volleyball enthusiasts at Marist Brothers' High School have the opportunity to showcase their skills on the court. Our volleyball teams train diligently under the guidance of experienced coaches, focusing on technique, communication, and teamwork. Whether competing in local leagues or interschool competitions, our students display resilience and sportsmanship as they strive for victory.
+            </p>
+        </section>
+        <h2 class="ending">At Marist Brothers' High School, sports are more than just games <br /><br />They are a way of life!</h2>
+        <!-- Add more sections as needed -->
+    </main>
+</body>
+
+
+
+
+
