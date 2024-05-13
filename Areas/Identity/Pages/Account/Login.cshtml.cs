@@ -20,10 +20,10 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<MBHS_WebsiteUser> _signInManager;
+        private readonly SignInManager<Teacher> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<MBHS_WebsiteUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<Teacher> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

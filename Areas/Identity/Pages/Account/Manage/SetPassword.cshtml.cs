@@ -14,12 +14,12 @@ namespace MBHS_Website.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
-        private readonly SignInManager<MBHS_WebsiteUser> _signInManager;
+        private readonly UserManager<Teacher> _userManager;
+        private readonly SignInManager<Teacher> _signInManager;
 
         public SetPasswordModel(
-            UserManager<MBHS_WebsiteUser> userManager,
-            SignInManager<MBHS_WebsiteUser> signInManager)
+            UserManager<Teacher> userManager,
+            SignInManager<Teacher> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

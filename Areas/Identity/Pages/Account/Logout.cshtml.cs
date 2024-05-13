@@ -15,10 +15,10 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<MBHS_WebsiteUser> _signInManager;
+        private readonly SignInManager<Teacher> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<MBHS_WebsiteUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<Teacher> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

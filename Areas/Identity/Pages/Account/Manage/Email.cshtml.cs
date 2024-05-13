@@ -18,13 +18,13 @@ namespace MBHS_Website.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
-        private readonly SignInManager<MBHS_WebsiteUser> _signInManager;
+        private readonly UserManager<Teacher> _userManager;
+        private readonly SignInManager<Teacher> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<MBHS_WebsiteUser> userManager,
-            SignInManager<MBHS_WebsiteUser> signInManager,
+            UserManager<Teacher> userManager,
+            SignInManager<Teacher> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -74,7 +74,7 @@ namespace MBHS_Website.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(MBHS_WebsiteUser user)
+        private async Task LoadAsync(Teacher user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;

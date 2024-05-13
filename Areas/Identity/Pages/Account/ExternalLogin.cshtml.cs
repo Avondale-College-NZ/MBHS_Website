@@ -24,17 +24,17 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
-        private readonly SignInManager<MBHS_WebsiteUser> _signInManager;
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
-        private readonly IUserStore<MBHS_WebsiteUser> _userStore;
-        private readonly IUserEmailStore<MBHS_WebsiteUser> _emailStore;
+        private readonly SignInManager<Teacher> _signInManager;
+        private readonly UserManager<Teacher> _userManager;
+        private readonly IUserStore<Teacher> _userStore;
+        private readonly IUserEmailStore<Teacher> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
-            SignInManager<MBHS_WebsiteUser> signInManager,
-            UserManager<MBHS_WebsiteUser> userManager,
-            IUserStore<MBHS_WebsiteUser> userStore,
+            SignInManager<Teacher> signInManager,
+            UserManager<Teacher> userManager,
+            IUserStore<Teacher> userStore,
             ILogger<ExternalLoginModel> logger,
             IEmailSender emailSender)
         {
@@ -198,27 +198,27 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private MBHS_WebsiteUser CreateUser()
+        private Teacher CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<MBHS_WebsiteUser>();
+                return Activator.CreateInstance<Teacher>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(MBHS_WebsiteUser)}'. " +
-                    $"Ensure that '{nameof(MBHS_WebsiteUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(Teacher)}'. " +
+                    $"Ensure that '{nameof(Teacher)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the external login page in /Areas/Identity/Pages/Account/ExternalLogin.cshtml");
             }
         }
 
-        private IUserEmailStore<MBHS_WebsiteUser> GetEmailStore()
+        private IUserEmailStore<Teacher> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<MBHS_WebsiteUser>)_userStore;
+            return (IUserEmailStore<Teacher>)_userStore;
         }
     }
 }

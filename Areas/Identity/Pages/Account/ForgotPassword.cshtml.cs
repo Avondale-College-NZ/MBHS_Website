@@ -19,10 +19,10 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
+        private readonly UserManager<Teacher> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<MBHS_WebsiteUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<Teacher> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

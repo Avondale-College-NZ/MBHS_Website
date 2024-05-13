@@ -17,9 +17,9 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
 {
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
+        private readonly UserManager<Teacher> _userManager;
 
-        public ResetPasswordModel(UserManager<MBHS_WebsiteUser> userManager)
+        public ResetPasswordModel(UserManager<Teacher> userManager)
         {
             _userManager = userManager;
         }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MBHS_Website.Areas.Identity.Data;
 
-public class MBHS_Context : IdentityDbContext<MBHS_WebsiteUser>
+public class MBHS_Context : IdentityDbContext<Teacher>
 {
     public MBHS_Context(DbContextOptions<MBHS_Context> options)
         : base(options)

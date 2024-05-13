@@ -25,7 +25,7 @@ namespace MBHS_Website.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MBHS_Website.Areas.Identity.Data.MBHS_WebsiteUser", b =>
+            modelBuilder.Entity("MBHS_Website.Areas.Identity.Data.Teacher", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -238,7 +238,7 @@ namespace MBHS_Website.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("MBHS_Website.Areas.Identity.Data.MBHS_WebsiteUser", null)
+                    b.HasOne("MBHS_Website.Areas.Identity.Data.Teacher", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -247,7 +247,7 @@ namespace MBHS_Website.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MBHS_Website.Areas.Identity.Data.MBHS_WebsiteUser", null)
+                    b.HasOne("MBHS_Website.Areas.Identity.Data.Teacher", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -262,7 +262,7 @@ namespace MBHS_Website.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MBHS_Website.Areas.Identity.Data.MBHS_WebsiteUser", null)
+                    b.HasOne("MBHS_Website.Areas.Identity.Data.Teacher", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -271,7 +271,7 @@ namespace MBHS_Website.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("MBHS_Website.Areas.Identity.Data.MBHS_WebsiteUser", null)
+                    b.HasOne("MBHS_Website.Areas.Identity.Data.Teacher", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -6,7 +6,7 @@ var connectionString = builder.Configuration.GetConnectionString("MBHS_ContextCo
 
 builder.Services.AddDbContext<MBHS_Context>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<MBHS_WebsiteUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MBHS_Context>();
+builder.Services.AddDefaultIdentity<Teacher>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MBHS_Context>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

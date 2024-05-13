@@ -18,10 +18,10 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
+        private readonly UserManager<Teacher> _userManager;
         private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<MBHS_WebsiteUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<Teacher> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;

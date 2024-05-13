@@ -17,9 +17,9 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<MBHS_WebsiteUser> _userManager;
+        private readonly UserManager<Teacher> _userManager;
 
-        public ConfirmEmailModel(UserManager<MBHS_WebsiteUser> userManager)
+        public ConfirmEmailModel(UserManager<Teacher> userManager)
         {
             _userManager = userManager;
         }
