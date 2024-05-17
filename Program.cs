@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MBHS_Website.Areas.Identity.Data;
+using MBHS_Website.Models;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("MBHS_ContextConnection") ?? throw new InvalidOperationException("Connection string 'MBHS_ContextConnection' not found.");
 

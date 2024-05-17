@@ -1,4 +1,5 @@
-﻿@inject SignInManager<Teacher> SignInManager
+﻿@using MBHS_Website.Models
+@inject SignInManager<Teacher> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

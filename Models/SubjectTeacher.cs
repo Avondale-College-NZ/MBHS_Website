@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MBHS_Website.Areas.Identity.Data;
 
 namespace MBHS_Website.Models
 {
