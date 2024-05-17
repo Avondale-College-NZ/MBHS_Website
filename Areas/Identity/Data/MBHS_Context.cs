@@ -1,5 +1,4 @@
-﻿using MBHS_Website.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,4 +18,16 @@ public class MBHS_Context : IdentityDbContext<Teacher>
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
     }
+
+    public DbSet<MBHS_Website.Models.Grade> Grade { get; set; } = default!;
+
+    public DbSet<MBHS_Website.Models.Exam> Exam { get; set; } = default!;
+
+    public DbSet<MBHS_Website.Models.Student> Student { get; set; } = default!;
+
+    public DbSet<MBHS_Website.Models.StudentSubjectTeacher> StudentSubjectTeacher { get; set; } = default!;
+
+    public DbSet<MBHS_Website.Models.Subject> Subject { get; set; } = default!;
+
+    public DbSet<MBHS_Website.Models.SubjectTeacher> SubjectTeacher { get; set; } = default!;
 }

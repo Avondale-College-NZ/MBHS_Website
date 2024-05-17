@@ -1,9 +1,9 @@
-﻿using MBHS_Website.Areas.Identity.Data;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using MBHS_Website.Areas.Identity.Data;
 
 namespace MBHS_Website.Models
 {
-	public class SubjectTeacher
+    public class SubjectTeacher
 	{
 		[Key]
 		public int SubjectTeacherId { get; set; }

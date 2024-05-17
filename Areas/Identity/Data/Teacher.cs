@@ -14,7 +14,6 @@ public class Teacher : IdentityUser
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
-
     public ICollection<SubjectTeacher> SubjectTeachers { get; set; }
 
 }
