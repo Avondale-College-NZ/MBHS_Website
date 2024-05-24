@@ -72,14 +72,29 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+            [Display(Name = "Firstname")]
+            public string FirstName { get; set; }
+            //Displays name fields along with appropraite validation so numbers can't be added
+            //Also doesn't let the name be longer than 40 characters
+            [Required]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+            [Display(Name = "Lastname")]
+            public string LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+            [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [Required]
+           
+            [Display(Name = "DateOfBirth")]
+            public DateTime DateOfBirth { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -115,6 +130,10 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.DateOfBirth = Input.DateOfBirth;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
