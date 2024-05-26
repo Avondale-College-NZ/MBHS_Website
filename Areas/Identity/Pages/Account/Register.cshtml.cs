@@ -94,6 +94,8 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
             [Required]
            
             [Display(Name = "DateOfBirth")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             public DateTime DateOfBirth { get; set; }
 
             /// <summary>
