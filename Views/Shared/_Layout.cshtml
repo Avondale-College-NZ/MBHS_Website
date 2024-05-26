@@ -89,7 +89,7 @@
                 margin-right: 20px;
             }
 
-                .nav-links li a {
+                .nav-links li a  {
                     color: #00205b; /* Dark blue */
                     text-decoration: none;
                     font-weight: bold;
@@ -367,7 +367,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li>
-                        <a id="manage"  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</a>
                     </li>
                     <li>
                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
