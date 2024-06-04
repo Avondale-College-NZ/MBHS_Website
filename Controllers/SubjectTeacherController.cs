@@ -19,14 +19,14 @@ namespace MBHS_Website.Controllers
             _context = context;
         }
 
-        // GET: SubjectTeachers
+        // GET: SubjectTeacher
         public async Task<IActionResult> Index()
         {
-            var mBHS_Context = _context.SubjectTeacher.Include(s => s.Subject);
+            var mBHS_Context = _context.SubjectTeacher.Include(s => s.Subject).Include(s => s.Teacher);
             return View(await mBHS_Context.ToListAsync());
         }
 
-        // GET: SubjectTeachers/Details/5
+        // GET: SubjectTeacher/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.SubjectTeacher == null)
@@ -36,6 +36,7 @@ namespace MBHS_Website.Controllers
 
             var subjectTeacher = await _context.SubjectTeacher
                 .Include(s => s.Subject)
+                .Include(s => s.Teacher)
                 .FirstOrDefaultAsync(m => m.SubjectTeacherId == id);
             if (subjectTeacher == null)
             {
@@ -45,31 +46,33 @@ namespace MBHS_Website.Controllers
             return View(subjectTeacher);
         }
 
-        // GET: SubjectTeachers/Create
+        // GET: SubjectTeacher/Create
         public IActionResult Create()
         {
             ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId");
+            ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
-        // POST: SubjectTeachers/Create
+        // POST: SubjectTeacher/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SubjectTeacherId,SubjectId,Id,Room")] SubjectTeacher subjectTeacher)
+        public async Task<IActionResult> Create([Bind("SubjectTeacherId,SubjectId,TeacherId,Room")] SubjectTeacher subjectTeacher)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(subjectTeacher);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", subjectTeacher.SubjectId);
+            ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "UserName", subjectTeacher.TeacherId);
             return View(subjectTeacher);
         }
 
-        // GET: SubjectTeachers/Edit/5
+        // GET: SubjectTeacher/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.SubjectTeacher == null)
@@ -83,22 +86,23 @@ namespace MBHS_Website.Controllers
                 return NotFound();
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", subjectTeacher.SubjectId);
+            ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "UserName", subjectTeacher.TeacherId);
             return View(subjectTeacher);
         }
 
-        // POST: SubjectTeachers/Edit/5
+        // POST: SubjectTeacher/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SubjectTeacherId,SubjectId,Id,Room")] SubjectTeacher subjectTeacher)
+        public async Task<IActionResult> Edit(int id, [Bind("SubjectTeacherId,SubjectId,TeacherId,Room")] SubjectTeacher subjectTeacher)
         {
             if (id != subjectTeacher.SubjectTeacherId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -119,10 +123,11 @@ namespace MBHS_Website.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", subjectTeacher.SubjectId);
+            ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "UserName", subjectTeacher.TeacherId);
             return View(subjectTeacher);
         }
 
-        // GET: SubjectTeachers/Delete/5
+        // GET: SubjectTeacher/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.SubjectTeacher == null)
@@ -132,6 +137,7 @@ namespace MBHS_Website.Controllers
 
             var subjectTeacher = await _context.SubjectTeacher
                 .Include(s => s.Subject)
+                .Include(s => s.Teacher)
                 .FirstOrDefaultAsync(m => m.SubjectTeacherId == id);
             if (subjectTeacher == null)
             {
@@ -141,7 +147,7 @@ namespace MBHS_Website.Controllers
             return View(subjectTeacher);
         }
 
-        // POST: SubjectTeachers/Delete/5
+        // POST: SubjectTeacher/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
