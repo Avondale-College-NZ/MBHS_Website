@@ -124,6 +124,45 @@
                        
                     }
 
+                    .nav-links li button::before {
+                        content: ''; /* Create a pseudo-element for the border */
+                        position: absolute; /* Position absolutely */
+                        top: 0; /* Align to the top */
+                        left: 0; /* Align to the left */
+                        width: 100%; /* Full width */
+                        height: 0; /* Initially hidden */
+                        border-bottom: 2px solid #ed2939; /* Border color */
+                        opacity: 0; /* Initially transparent */
+                        transition: height 0.3s ease, opacity 0.3s ease; /* Transition height and opacity properties */
+                    }
+
+                        .nav-links li button:hover::before {
+                            height: 100%; /* Expand height on hover */
+                            opacity: 1; /* Increase opacity on hover */
+                        }
+
+                    .nav-links li button:hover {
+                        color: #ed2939; /* Subtle red on hover */
+                    }
+
+                    button {
+                        margin:0;
+                        border:0;
+                        color: #00205b; /* Dark blue */
+                        text-decoration: none;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        
+            
+                        transition: color 0.3s ease;
+                        position: relative; /* Position relative for absolute positioning */
+                        overflow: hidden; /* Hide the overflow */
+                    }
+                    form {
+                        margin:0;
+                        padding:0;
+                    }
+
         .logo-container {
             display: grid;
             grid-template-columns: auto auto;
