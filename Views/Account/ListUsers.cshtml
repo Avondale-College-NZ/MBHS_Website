@@ -7,7 +7,8 @@
 @{
     ViewBag.Title = "All Users";
 }
-
+ @if (User.IsInRole("Admin"))
+                {
 <h1>All Users</h1>
 
 @if (Model.Any())
@@ -48,4 +49,9 @@ else
             No Users Added Yet
         </div>
     </div>
+    }
+}
+else
+{
+    <h1>Error: Invalid User</h1>
 }
