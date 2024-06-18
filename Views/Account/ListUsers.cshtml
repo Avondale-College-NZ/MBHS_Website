@@ -7,10 +7,6 @@
 @{
     ViewBag.Title = "All Users";
 }
- @if (User.IsInRole("Admin"))
-                {
-<h1>All Users</h1>
-
 @if (Model.Any())
 {
     <a asp-action="Register" asp-controller="Account"
@@ -41,7 +37,7 @@
             </div>
         </div>
     }
-}
+    }
 else
 {
     <div class="card">
@@ -50,8 +46,4 @@ else
         </div>
     </div>
     }
-}
-else
-{
-    <h1>Error: Invalid User</h1>
 }

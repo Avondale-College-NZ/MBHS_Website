@@ -1,4 +1,5 @@
 ﻿using MBHS_Website.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace MBHS_Website.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditUser(string UserId)
         {
             //First Fetch the User Details by UserId
@@ -50,6 +52,7 @@ namespace MBHS_Website.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
             //First Fetch the User by Id from the database
@@ -69,6 +72,7 @@ namespace MBHS_Website.Controllers
                 user.UserName = model.UserName;
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
+                user.DateOfBirth = model.DateOfBirth;
                 //UpdateAsync Method will update the user data in the AspNetUsers Identity table
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
@@ -89,12 +93,14 @@ namespace MBHS_Website.Controllers
         }
 
             [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult ListUsers()
         {
             var users = _userManager.Users;
             return View(users);
         }
         // GET: AccountController
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
