@@ -31,7 +31,7 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.DateOfBirth" class="form-control"  aria-required="true" />
+                <input asp-for="Input.DateOfBirth" class="form-control" aria-required="true" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 <label asp-for="Input.DateOfBirth">Date Of Birth</label>
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
