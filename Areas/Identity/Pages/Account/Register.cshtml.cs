@@ -163,8 +163,9 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        returnUrl = Url.Page(
+                        "/Account/ListUsers");
+                        return Redirect("~/Account/ListUsers");
                     }
                 }
                 foreach (var error in result.Errors)
