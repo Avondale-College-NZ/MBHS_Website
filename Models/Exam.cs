@@ -10,7 +10,6 @@ namespace MBHS_Website.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 		public Subject Subject { get; set; }
-
 		public ICollection<Grade> Grades { get; set; }
 	}
 }

@@ -17,15 +17,211 @@
             {
                 <div class="form-check m-1">
                     <input type="hidden" asp-for="@Model[i].RoleId" />
-                    <input type="hidden" asp-for="@Model[i].RoleName" />
+                    <input type="hidden" asp-for="@Model[i].RoleName" /> 
 
-                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
-                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                    <input  id="@i" asp-for="@Model[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label"  asp-for="@Model[i].IsSelected">
                         @Model[i].RoleName - @Model[i].Description
                     </label>
                 </div>
             }
             <div asp-validation-summary="All" class="text-danger"></div>
+
+            @* <script>
+                
+                document.getElementById(0).onclick = function () {
+
+
+
+                  
+                        if (document.getElementById(0).checked === false) {
+                            document.getElementById(0).click()
+                          
+
+                        }
+                        if (document.getElementById(1).checked === true) {
+                            document.getElementById(1).click()
+                         
+
+                        }
+                        if (document.getElementById(2).checked === true) {
+                            document.getElementById(2).click()
+                          
+                        }
+
+                    
+                 
+                };
+                document.getElementById(1).onclick = function () {
+
+                  
+                        if (document.getElementById(1).checked === false) {
+                            document.getElementById(1).click()
+                        
+                        }
+
+                        if (document.getElementById(2).checked === true) {
+                            document.getElementById(2).click()
+                        
+
+                        }
+                        if (document.getElementById(0).checked === true) {
+                            document.getElementById(0).click()
+                          
+                        }
+
+              
+                };
+                document.getElementById(2).onclick = function () {
+
+                 
+                        if (document.getElementById(2).checked === false) {
+                            document.getElementById(2).click()
+                         
+                        }
+                        if (document.getElementById(1).checked === true) {
+                            document.getElementById(1).click()
+                         
+                        }
+                        if (document.getElementById(0).checked === true) {
+                            document.getElementById(0).click()
+                          
+                        }
+
+                    
+                  
+                };
+            </script> *@
+          @*  <script>
+                document.getElementById(0).onclick = function () {
+                    if (document.getElementById(1).checked === true) {
+                        document.getElementById(2).click()
+                    };
+                }
+            </script>*@
+            
+            
+          @*  <script>
+                
+               let a = true;
+               let b = true;
+               let c = true;
+                 alert(a)
+
+                document.getElementById(0).onclick = function () {
+
+                    
+
+                    if (a === true) {
+
+                    
+                        if (document.getElementById(0).checked === false) {
+                            document.getElementById(0).click()
+                            a = false;
+
+                        }
+                        if (document.getElementById(1).checked === true) {
+                            document.getElementById(1).click()
+                            b = false;
+                            
+                        }
+                        if (document.getElementById(2).checked === true) {
+                            document.getElementById(2).click()
+                            c = false;
+                        }
+
+                    }
+                    alert(a b c)
+                    a = true;
+                };
+                document.getElementById(1).onclick = function () {
+                    
+                    if (b === true) {
+
+
+                        if (document.getElementById(1).checked === false) {
+                            document.getElementById(1).click()
+                            b = false;
+
+                        }
+
+                        if (document.getElementById(2).checked === true) {
+                            document.getElementById(2).click()
+                            c = false;
+
+                        }
+                        if (document.getElementById(0).checked === true) {
+                            document.getElementById(0).click()
+                            a = false;
+                        }
+
+                    }
+                    b = true;
+                };
+                document.getElementById(2).onclick = function () {
+                    
+                    if (c === true) {
+
+                        if (document.getElementById(2).checked === false) {
+                            document.getElementById(2).click()
+                            c = false;
+                        }
+                        if (document.getElementById(1).checked === true) {
+                            document.getElementById(1).click()
+                            b = false;
+                        }
+                        if (document.getElementById(0).checked === true) {
+                            document.getElementById(0).click()
+                            a = false;
+                        }
+
+                    }
+                    c = true;
+                };
+                </script> *@
+ 
+@*
+            <script>
+                 document.getElementById(0).onclick = function() {
+                    for (let z = 0; z < 3; z++)
+                    {
+                        if !(z === 0)
+                        {
+                                    
+                                if (document.getElementById(z).checked === true) {
+                                    document.getElementById(z).click()
+                           };
+                       
+                        };
+                    };
+                     document.getElementById(1).onclick = function() {
+                    for (let z = 0; z < 3; z++)
+                    {
+                        if !(z === 1)
+                        {
+                                    
+                                if (document.getElementById(z).checked === true) {
+                                    document.getElementById(z).click()
+                           };
+                       
+                        };
+                    };
+                        document.getElementById(2).onclick = function () {
+                            for (let z = 0; z < 3; z++)
+                            {
+                                if !(z === 2) {
+
+                                    if (document.getElementById(z).checked === true) {
+                                        document.getElementById(z).click()
+                                    };
+
+                                };
+                            };
+
+                </script> *@
+                
+
+            
         </div>
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary"
