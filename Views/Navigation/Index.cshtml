@@ -1,28 +1,98 @@
 ﻿
+<!DOCTYPE html>
+
 @{
     ViewData["Title"] = "Navigation";
 }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Hub</title>
+    <style>
+        .nav-container {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            
+       
+        }
+        .body-container{
+            background: linear-gradient(135deg, rgba(219,222,233,1) 20%, rgba(233,221,221,1) 50%);
+        }
 
-<h1>Navigation</h1>
+        .nav-pages {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-<li>
-    <a asp-area="" asp-controller="Grade" asp-action="Index">Grade</a>
-</li>
-<li>
-    <a asp-area="" asp-controller="Exam" asp-action="Index">Exam</a>
-</li>
-<li>
-    <a asp-area="" asp-controller="Student" asp-action="Index">Student</a>
-</li>
-<li>
-    <a asp-area="" asp-controller="Subject" asp-action="Index">Subject</a>
-</li>
-<li>
-    <a asp-area="" asp-controller="StudentSubjectTeacher" asp-action="Index">StudentSubjectTeacher</a>
-</li>
-<li>
-    <a asp-area="" asp-controller="SubjectTeacher" asp-action="Index">SubjectTeacher</a>
-</li>
-<li>
-    <a asp-area="" asp-controller="Account" asp-action="ListUsers">Staff</a>
-</li>
+        .page {
+            margin: 10px;
+            width: calc(50% - 20px);
+        }
+
+        .link {
+            font-size: large;
+            text-decoration: none;
+            color: white;
+            background-color: #003366; /* Red */
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: block;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .link:hover {
+                background-color: #ff3333; /* Dark blue */
+            color: white;
+        }
+
+        .link:active {
+                background-color: #ff3333; /* Dark blue */
+            color: white;
+        }
+
+        @@media (max-width: 600px) {
+            .page {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .link {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-container">
+        <h1 style="margin:50px;">MBHS Navigation Portal</h1>
+    <ul class="nav-pages">
+        <li class="page">  <a class="link" asp-area="" asp-controller="Grade" asp-action="Index">Grade</a></li>
+        <li class="page"> <a class="link" asp-area="" asp-controller="Exam" asp-action="Index">Exam</a></li>
+        <li class="page"> <a class="link" asp-area="" asp-controller="Student" asp-action="Index">Student</a></li>
+        <li class="page"> <a class="link" asp-area="" asp-controller="Subject" asp-action="Index">Subject</a></li>
+        <li class="page">  <a class="link" asp-area="" asp-controller="StudentSubjectTeacher" asp-action="Index">StudentSubjectTeacher</a></li>
+        <li class="page">  <a class="link" asp-area="" asp-controller="SubjectTeacher" asp-action="Index">SubjectTeacher</a></li>
+        <li class="page"> <a class="link" asp-area="" asp-controller="Account" asp-action="ListUsers">Staff</a></li>
+    </ul>
+</div>
+</body>
+</html>
+
