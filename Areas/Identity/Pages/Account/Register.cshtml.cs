@@ -19,7 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-
+using MBHS_Website.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MBHS_Website.Areas.Identity.Pages.Account
 {
@@ -27,19 +28,23 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<Teacher> _signInManager;
         private readonly UserManager<Teacher> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<Teacher> _userStore;
         private readonly IUserEmailStore<Teacher> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        
 
         public RegisterModel(
             UserManager<Teacher> userManager,
+            RoleManager<IdentityRole> roleManager,
             IUserStore<Teacher> userStore,
             SignInManager<Teacher> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -136,6 +141,7 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.DateOfBirth = Input.DateOfBirth;
+               
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -153,6 +159,13 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
+
+                    var defaultrole = _roleManager.FindByNameAsync("User").Result;
+
+                    if (defaultrole != null)
+                    {
+                        IdentityResult roleresult = await _userManager.AddToRoleAsync(user, defaultrole.Name);
+                    }
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
