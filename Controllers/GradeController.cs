@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MBHS_Website.Areas.Identity.Data;
 using MBHS_Website.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MBHS_Website.Controllers
 {
@@ -22,7 +24,7 @@ namespace MBHS_Website.Controllers
         // GET: Grade
         public async Task<IActionResult> Index()
         {
-            var mBHS_Context = _context.Grade.Include(g => g.Exam).Include(g => g.Student);
+            var mBHS_Context = _context.Grade.Include(g => g.Exam).Include(g => g.Student).Include(g => g.Exam.Subject);
             return View(await mBHS_Context.ToListAsync());
         }
 
@@ -49,8 +51,28 @@ namespace MBHS_Website.Controllers
         // GET: Grade/Create
         public IActionResult Create()
         {
-            ViewData["ExamId"] = new SelectList(_context.Set<Exam>(), "ExamId", "ExamId");
-            ViewData["StudentId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId");
+
+
+            var Exam = _context.Exam.Include(u => u.Subject)
+            .Select(s => new
+            {
+                Text = s.Subject.Title + " | " + s.Date.ToString().Remove(s.Date.ToString().Length - 16),
+                Value = s.ExamId
+
+                                }
+                                );
+            var Student = _context.Student
+                                .Select(s => new
+                                {
+                                    Text = s.FirstName + " " + s.LastName,
+                                    Value = s.StudentId
+
+                                }
+                                );
+
+            ViewData["ExamId"] = new SelectList(Exam, "Value", "Text");
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text");
+          
             return View();
         }
 
@@ -61,15 +83,21 @@ namespace MBHS_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GradeId,Mark,ExamId,StudentId")] Grade grade)
         {
-            if (!ModelState.IsValid)
+
+            
+            if (ModelState.IsValid)
             {
                 _context.Add(grade);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+                
+
             }
-            ViewData["ExamId"] = new SelectList(_context.Set<Exam>(), "ExamId", "ExamId", grade.ExamId);
-            ViewData["StudentId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId", grade.StudentId);
+            ViewData["ExamId"] = new SelectList(_context.Exam, "ExamId", "ExamId", grade.ExamId);
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
             return View(grade);
+
+
         }
 
         // GET: Grade/Edit/5
@@ -85,8 +113,27 @@ namespace MBHS_Website.Controllers
             {
                 return NotFound();
             }
-            ViewData["ExamId"] = new SelectList(_context.Set<Exam>(), "ExamId", "ExamId", grade.ExamId);
-            ViewData["StudentId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId", grade.StudentId);
+
+            var Exam = _context.Exam.Include(u => u.Subject)
+                                .Select(s => new
+                                {
+                                    Text = s.Subject.Title + " | " + s.Date.ToString().Remove(s.Date.ToString().Length - 16),
+                                    Value = s.ExamId
+
+                                }
+                                );
+            var Student = _context.Student
+                                .Select(s => new
+                                {
+                                    Text = s.FirstName + " " + s.LastName,
+                                    Value = s.StudentId
+
+                                }
+                                );
+
+            ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
             return View(grade);
         }
 
@@ -102,8 +149,9 @@ namespace MBHS_Website.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+          
                 try
                 {
                     _context.Update(grade);
@@ -122,8 +170,8 @@ namespace MBHS_Website.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ExamId"] = new SelectList(_context.Set<Exam>(), "ExamId", "ExamId", grade.ExamId);
-            ViewData["StudentId"] = new SelectList(_context.Set<Student>(), "StudentId", "StudentId", grade.StudentId);
+            ViewData["ExamId"] = new SelectList(_context.Exam, "ExamId", "ExamId", grade.ExamId);
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
             return View(grade);
         }
 
@@ -138,6 +186,7 @@ namespace MBHS_Website.Controllers
             var grade = await _context.Grade
                 .Include(g => g.Exam)
                 .Include(g => g.Student)
+                .Include(g => g.Exam.Subject)
                 .FirstOrDefaultAsync(m => m.GradeId == id);
             if (grade == null)
             {

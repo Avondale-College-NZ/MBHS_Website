@@ -48,7 +48,7 @@ namespace MBHS_Website.Controllers
         // GET: Exam/Create
         public IActionResult Create()
         {
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId");
+            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "Title");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace MBHS_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ExamId,SubjectId,Date")] Exam exam)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(exam);
                 await _context.SaveChangesAsync();
@@ -82,7 +82,7 @@ namespace MBHS_Website.Controllers
             {
                 return NotFound();
             }
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId", exam.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "Title", exam.SubjectId);
             return View(exam);
         }
 
@@ -98,7 +98,7 @@ namespace MBHS_Website.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

@@ -48,7 +48,7 @@ namespace MBHS_Website.Controllers
         // GET: Subject/Create
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Department, "DepartmentId", "DepartmentId");
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "DepartmentId", "Title");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace MBHS_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SubjectId,Title,DepartmentId")] Subject subject)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(subject);
                 await _context.SaveChangesAsync();
@@ -82,7 +82,7 @@ namespace MBHS_Website.Controllers
             {
                 return NotFound();
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Department, "DepartmentId", "DepartmentId", subject.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(_context.Department, "DepartmentId", "Title", subject.DepartmentId);
             return View(subject);
         }
 
@@ -98,7 +98,7 @@ namespace MBHS_Website.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

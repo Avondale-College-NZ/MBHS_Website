@@ -22,7 +22,7 @@ namespace MBHS_Website.Controllers
         // GET: StudentSubjectTeacher
         public async Task<IActionResult> Index()
         {
-            var mBHS_Context = _context.StudentSubjectTeacher.Include(s => s.Student).Include(s => s.SubjectTeacher);
+            var mBHS_Context = _context.StudentSubjectTeacher.Include(s => s.Student).Include(s => s.SubjectTeacher).Include(s => s.SubjectTeacher.Subject).Include(s => s.SubjectTeacher.Teacher);
             return View(await mBHS_Context.ToListAsync());
         }
 
@@ -49,8 +49,27 @@ namespace MBHS_Website.Controllers
         // GET: StudentSubjectTeacher/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId");
-            ViewData["SubjectTeacherId"] = new SelectList(_context.Set<SubjectTeacher>(), "SubjectTeacherId", "SubjectTeacherId");
+
+            var SubjectTeacher = _context.SubjectTeacher.Include(u => u.Subject).Include(u => u.Teacher)
+                                .Select(s => new
+                                {
+                                    Text = s.Subject.Title + " | " + s.Teacher.FirstName + " " + s.Teacher.LastName,
+                                    Value = s.SubjectTeacherId
+
+                                }
+                                );
+            ViewData["SubjectTeacherId"] = new SelectList(SubjectTeacher, "Value", "Text");
+
+            var Student = _context.Student
+                               .Select(s => new
+                               {
+                                   Text = s.FirstName + " " + s.LastName,
+                                   Value = s.StudentId
+
+                               }
+                               );
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text");
+            
             return View();
         }
 
@@ -86,8 +105,29 @@ namespace MBHS_Website.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", studentSubjectTeacher.StudentId);
-            ViewData["SubjectTeacherId"] = new SelectList(_context.Set<SubjectTeacher>(), "SubjectTeacherId", "SubjectTeacherId", studentSubjectTeacher.SubjectTeacherId);
+
+
+            var SubjectTeacher = _context.SubjectTeacher.Include(u => u.Subject).Include(u => u.Teacher)
+                               .Select(s => new
+                               {
+                                   Text = s.Subject.Title + " | " + s.Teacher.FirstName + " " + s.Teacher.LastName,
+                                   Value = s.SubjectTeacherId
+
+                               }
+                               );
+        
+
+            var Student = _context.Student
+                               .Select(s => new
+                               {
+                                   Text = s.FirstName + " " + s.LastName,
+                                   Value = s.StudentId
+
+                               }
+                               );
+          
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", studentSubjectTeacher.StudentId);
+            ViewData["SubjectTeacherId"] = new SelectList(SubjectTeacher, "Value", "Text", studentSubjectTeacher.SubjectTeacherId);
             return View(studentSubjectTeacher);
         }
 
@@ -136,9 +176,7 @@ namespace MBHS_Website.Controllers
                 return NotFound();
             }
 
-            var studentSubjectTeacher = await _context.StudentSubjectTeacher
-                .Include(s => s.Student)
-                .Include(s => s.SubjectTeacher)
+            var studentSubjectTeacher = await _context.StudentSubjectTeacher.Include(s => s.Student).Include(s => s.SubjectTeacher).Include(s => s.SubjectTeacher.Subject).Include(s => s.SubjectTeacher.Teacher)
                 .FirstOrDefaultAsync(m => m.StudentSubjectTeacherId == id);
             if (studentSubjectTeacher == null)
             {

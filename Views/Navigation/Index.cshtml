@@ -86,11 +86,16 @@
     <ul class="nav-pages">
         <li class="page">  <a class="link" asp-area="" asp-controller="Grade" asp-action="Index">Grade</a></li>
         <li class="page"> <a class="link" asp-area="" asp-controller="Exam" asp-action="Index">Exam</a></li>
-        <li class="page"> <a class="link" asp-area="" asp-controller="Student" asp-action="Index">Student</a></li>
+       
         <li class="page"> <a class="link" asp-area="" asp-controller="Subject" asp-action="Index">Subject</a></li>
-        <li class="page">  <a class="link" asp-area="" asp-controller="StudentSubjectTeacher" asp-action="Index">StudentSubjectTeacher</a></li>
-        <li class="page">  <a class="link" asp-area="" asp-controller="SubjectTeacher" asp-action="Index">SubjectTeacher</a></li>
-        <li class="page"> <a class="link" asp-area="" asp-controller="Account" asp-action="ListUsers">Staff</a></li>
+        <li class="page">  <a class="link" asp-area="" asp-controller="StudentSubjectTeacher" asp-action="Index">Student's Classes</a></li>
+        <li class="page">  <a class="link" asp-area="" asp-controller="SubjectTeacher" asp-action="Index">Classes</a></li>
+       <li class="page">  <a class="link" asp-area="" asp-controller="Department" asp-action="Index">Department</a></li>
+            <li class="page"> <a class="link" asp-area="" asp-controller="Student" asp-action="Index">Student</a></li>
+       
+       @if(User.IsInRole("Admin")){
+       <li class="page"> <a class="link" style="border:2px solid salmon" asp-area="" asp-controller="Account" asp-action="ListUsers">STAFF</a></li>
+       }
     </ul>
 </div>
 </body>
