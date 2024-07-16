@@ -1,4 +1,4 @@
-﻿@model MBHS_Website.Models.Subject
+﻿@model MBHS_Website.Models.Department
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Subject</h4>
+    <h4>Department</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,14 +17,14 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Department)
+            @Html.DisplayNameFor(model => model.Building)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Department.DepartmentId)
+            @Html.DisplayFor(model => model.Building)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.SubjectId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.DepartmentId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
