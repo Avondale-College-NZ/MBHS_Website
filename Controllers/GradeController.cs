@@ -9,6 +9,7 @@ using MBHS_Website.Areas.Identity.Data;
 using MBHS_Website.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MBHS_Website.Controllers
 {
@@ -29,6 +30,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Grade/Details/5
+        [Authorize(Roles = "Admin,Manager,User")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Grade == null)
@@ -49,6 +51,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Grade/Create
+        [Authorize(Roles = "Admin,Manager,User")]
         public IActionResult Create()
         {
 
@@ -101,6 +104,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Grade/Edit/5
+        [Authorize(Roles = "Admin,Manager,User")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Grade == null)
@@ -176,6 +180,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Grade/Delete/5
+        [Authorize(Roles = "Admin,Manager,User")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Grade == null)

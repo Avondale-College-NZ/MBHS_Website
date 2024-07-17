@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MBHS_Website.Areas.Identity.Data;
 using MBHS_Website.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MBHS_Website.Controllers
 {
@@ -27,6 +28,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Exam/Details/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Exam == null)
@@ -46,6 +48,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Exam/Create
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult Create()
         {
             ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "Title");
@@ -70,6 +73,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Exam/Edit/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Exam == null)
@@ -123,6 +127,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Exam/Delete/5
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Exam == null)

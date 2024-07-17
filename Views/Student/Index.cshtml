@@ -5,10 +5,12 @@
 }
 
 <h1>Students</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -36,11 +38,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfBirth)
             </td>
+                @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                {
             <td>
                 <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
             </td>
+                }
         </tr>
 }
     </tbody>
