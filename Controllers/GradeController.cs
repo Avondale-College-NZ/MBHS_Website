@@ -23,10 +23,74 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Grade
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string sortOrder,
+   string currentFilter,
+   string SearchString,
+   int? pageNumber)
         {
-            var mBHS_Context = _context.Grade.Include(g => g.Exam).Include(g => g.Student).Include(g => g.Exam.Subject);
-            return View(await mBHS_Context.ToListAsync());
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["GradeSort"] = sortOrder == "Grade" ? "Grade_desc" : "Grade";
+            ViewData["SubjectSort"] = sortOrder == "Subject" ? "Subject_desc" : "Subject";
+            ViewData["DateSort"] = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewData["StudentSort"] = sortOrder == "Student" ? "Student_desc" : "Student";
+
+
+            if (_context.Student == null)
+            {
+                return Problem("Entity set 'MBHS_Website.Grade'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            var name = from n in _context.Grade.Include(g => g.Exam).Include(g => g.Student).Include(g => g.Exam.Subject)
+                       select n;
+
+            if (!System.String.IsNullOrEmpty(SearchString)) //filter feature
+            {
+                name = name.Where(s => s.Student.LastName!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Grade_desc":
+                    name = name.OrderByDescending(s => s.Mark);
+                    break;
+                case "Grade":
+                    name = name.OrderBy(s => s.Mark);
+                    break;
+                case "Subject_desc":
+                    name = name.OrderByDescending(s => s.Exam.Subject.Title);
+                    break;
+                case "Subject":
+                    name = name.OrderBy(s => s.Exam.Subject.Title);
+                    break;
+                case "Date_desc":
+                    name = name.OrderByDescending(s => s.Exam.Date);
+                    break;
+                case "Date":
+                    name = name.OrderBy(s => s.Exam.Date);
+                    break;
+                case "Student_desc":
+                    name = name.OrderByDescending(s => s.Student.FirstName).ThenByDescending(s => s.Student.FirstName);
+                    break;
+                case "Student":
+                    name = name.OrderBy(s => s.Student.FirstName).ThenBy(s => s.Student.FirstName);
+                    break;
+                default:
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<Grade>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
 
         // GET: Grade/Details/5

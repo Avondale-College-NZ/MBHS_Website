@@ -21,11 +21,61 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Department
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
-              return _context.Department != null ? 
-                          View(await _context.Department.ToListAsync()) :
-                          Problem("Entity set 'MBHS_Context.Department'  is null.");
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["BuildingSort"] = sortOrder == "Building" ? "Building_desc" : "Building";
+            ViewData["DepartmentSort"] = sortOrder == "Department" ? "Department_desc" : "Department";
+
+
+
+            if (_context.Subject == null)
+            {
+                return Problem("Entity set 'MBHS_Website.SubjectTeacher'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            var name = from n in _context.Department
+                       select n;
+
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature
+            {
+                name = name.Where(s => s.Title!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Building_desc":
+                    name = name.OrderByDescending(s => s.Building);
+                    break;
+                case "Building":
+                    name = name.OrderBy(s => s.Building);
+                    break;
+                case "Department_desc":
+                    name = name.OrderByDescending(s => s.Title);
+                    break;
+                case "Department":
+                    name = name.OrderBy(s => s.Title);
+                    break;
+
+                default:
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<Department>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
 
         // GET: Department/Details/5

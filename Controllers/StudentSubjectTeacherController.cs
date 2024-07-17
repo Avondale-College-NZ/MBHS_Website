@@ -21,10 +21,69 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: StudentSubjectTeacher
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string sortOrder,
+   string currentFilter,
+   string SearchString,
+   int? pageNumber)
         {
-            var mBHS_Context = _context.StudentSubjectTeacher.Include(s => s.Student).Include(s => s.SubjectTeacher).Include(s => s.SubjectTeacher.Subject).Include(s => s.SubjectTeacher.Teacher);
-            return View(await mBHS_Context.ToListAsync());
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["StudentSort"] = sortOrder == "Student" ? "Student_desc" : "Student";
+            ViewData["SubjectSort"] = sortOrder == "Subject" ? "Subject_desc" : "Subject";
+            ViewData["TeacherSort"] = sortOrder == "Teacher" ? "Teacher_desc" : "Teacher";
+
+
+
+            if (_context.Subject == null)
+            {
+                return Problem("Entity set 'MBHS_Website.SubjectTeacher'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            var name = from n in _context.StudentSubjectTeacher.Include(s => s.Student).Include(s => s.SubjectTeacher).Include(s => s.SubjectTeacher.Subject).Include(s => s.SubjectTeacher.Teacher)
+            select n;
+
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature
+            {
+                name = name.Where(s => s.Student.LastName!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Subject_desc":
+                    name = name.OrderByDescending(s => s.SubjectTeacher.Subject.Title);
+                    break;
+                case "Subject":
+                    name = name.OrderBy(s => s.SubjectTeacher.Subject.Title);
+                    break;
+                case "Student_desc":
+                    name = name.OrderByDescending(s => s.Student.FirstName).ThenByDescending(s => s.Student.LastName);
+                    break;
+                case "Student":
+                    name = name.OrderBy(s => s.Student.FirstName).ThenBy(s => s.Student.LastName);
+                    break;
+                case "Teacher_desc":
+                    name = name.OrderByDescending(s => s.SubjectTeacher.Teacher.FirstName).ThenByDescending(s => s.SubjectTeacher.Teacher.FirstName);
+                    break;
+                case "Teacher":
+                    name = name.OrderBy(s => s.SubjectTeacher.Teacher.FirstName).ThenBy(s => s.SubjectTeacher.Teacher.LastName);
+                    break;
+
+                default:
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<StudentSubjectTeacher>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
 
         // GET: StudentSubjectTeacher/Details/5

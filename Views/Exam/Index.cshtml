@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MBHS_Website.Models.Exam>
+﻿@model PaginatedList<MBHS_Website.Models.Exam>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,14 +11,23 @@
     <a asp-action="Create">Create New</a>
 </p>
                 }
+
+    
+    <form asp-controller="Exam" asp-action="Index">
+        <p>
+            Subject: <input type="text" name="SearchString" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Date</a>
+                </th>
             <th>
-                Subject
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["SubjectSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Subject</a>
+
             </th>
             <th></th>
         </tr>
@@ -44,3 +53,23 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

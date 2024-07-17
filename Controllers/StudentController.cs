@@ -21,11 +21,66 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
-              return _context.Student != null ? 
-                          View(await _context.Student.ToListAsync()) :
-                          Problem("Entity set 'MBHS_Context.Student'  is null.");
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["FirstNameSort"] = sortOrder == "FirstName" ? "FirstName_desc" : "FirstName";
+            ViewData["LastNameSort"] = sortOrder == "LastName" ? "LastName_desc" : "LastName";
+            ViewData["DateOfBirthSort"] = sortOrder == "DateOfBirth" ? "DateOfBirth_desc" : "DateOfBirth";
+
+
+            if (_context.Student == null)
+            {
+                return Problem("Entity set 'MBHS_Website.Students'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            var name = from n in _context.Student
+                       select n;
+
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature
+            {
+                name = name.Where(s => s.LastName!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "FirstName_desc":
+                    name = name.OrderByDescending(s => s.FirstName);
+                    break;
+                case "FirstName":
+                    name = name.OrderBy(s => s.FirstName);
+                    break;
+                case "LastName_desc":
+                    name = name.OrderByDescending(s => s.LastName);
+                    break;
+                case "LastName":
+                    name = name.OrderBy(s => s.LastName);
+                    break;
+                case "DateOfBirth_desc":
+                    name = name.OrderByDescending(s => s.DateOfBirth);
+                    break;
+                case "DateOfBirth":
+                    name = name.OrderBy(s => s.DateOfBirth);
+                    break;
+                default:
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<Student>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
 
         // GET: Students/Details/5

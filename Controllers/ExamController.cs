@@ -21,10 +21,62 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Exam
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
-            var mBHS_Context = _context.Exam.Include(e => e.Subject);
-            return View(await mBHS_Context.ToListAsync());
+
+            ViewData["CurrentSort"] = sortOrder;
+           
+            ViewData["SubjectSort"] = sortOrder == "Subject" ? "Subject_desc" : "Subject";
+            ViewData["DateSort"] = sortOrder == "Date" ? "Date_desc" : "Date";
+           
+
+
+            if (_context.Student == null)
+            {
+                return Problem("Entity set 'MBHS_Website.Grade'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            var name = from n in _context.Exam.Include(g => g.Subject)
+                       select n;
+
+            if (!System.String.IsNullOrEmpty(SearchString)) //filter feature
+            {
+                name = name.Where(s => s.Subject.Title!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+               
+                case "Subject_desc":
+                    name = name.OrderByDescending(s => s.Subject.Title);
+                    break;
+                case "Subject":
+                    name = name.OrderBy(s => s.Subject.Title);
+                    break;
+                case "Date_desc":
+                    name = name.OrderByDescending(s => s.Date);
+                    break;
+                case "Date":
+                    name = name.OrderBy(s => s.Date);
+                    break;
+                default:
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<Exam>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
 
         // GET: Exam/Details/5

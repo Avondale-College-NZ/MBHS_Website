@@ -21,11 +21,68 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: SubjectTeacher
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
-            var mBHS_Context = _context.SubjectTeacher.Include(s => s.Subject).Include(s => s.Teacher);
-            return View(await mBHS_Context.ToListAsync());
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["RoomSort"] = sortOrder == "Room" ? "Room_desc" : "Room";
+            ViewData["NameSort"] = sortOrder == "Name" ? "Name_desc" : "Name";
+            ViewData["SubjectSort"] = sortOrder == "Subject" ? "Subject_desc" : "Subject";
+
+
+            if (_context.SubjectTeacher == null)
+            {
+                return Problem("Entity set 'MBHS_Website.SubjectTeacher'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            var name = from n in _context.SubjectTeacher.Include(m => m.Teacher).Include(m => m.Subject)
+                       select n;
+
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature
+            {
+                name = name.Where(s => s.Subject.Title!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Room_desc":
+                    name = name.OrderByDescending(s => s.Room);
+                    break;
+                case "Room":
+                    name = name.OrderBy(s => s.Room);
+                    break;
+                case "Name_desc":
+                    name = name.OrderByDescending(s => s.Teacher.FirstName).ThenByDescending(s => s.Teacher.LastName);
+                    break;
+                case "Name":
+                    name = name.OrderBy(s => s.Teacher.FirstName).ThenBy(s => s.Teacher.LastName);
+                    break;
+                case "Subject_desc":
+                    name = name.OrderByDescending(s => s.Subject.Title);
+                    break;
+                case "Subject":
+                    name = name.OrderBy(s => s.Subject.Title);
+                    break;
+                default:
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<SubjectTeacher>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
+
         }
+
 
         // GET: SubjectTeacher/Details/5
         [Authorize(Roles = "Admin,Manager")]
