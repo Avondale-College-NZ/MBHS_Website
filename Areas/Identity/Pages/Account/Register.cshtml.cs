@@ -78,13 +78,14 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+            [RegularExpression(@"[a-zA-ZāàáâäãåąčćęèéêëėįìíîïłńōòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'\-\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+
             [Display(Name = "Firstname")]
             public string FirstName { get; set; }
             //Displays name fields along with appropraite validation so numbers can't be added
             //Also doesn't let the name be longer than 40 characters
             [Required]
-            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+            [RegularExpression(@"[a-zA-ZāàáâäãåąčćęèéêëėįìíîïłńōòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'\-\s]{1,40}$", ErrorMessage = "Enter a valid name")]
             [Display(Name = "Lastname")]
             public string LastName { get; set; }
             /// <summary>
