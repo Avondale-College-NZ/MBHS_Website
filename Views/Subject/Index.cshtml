@@ -41,24 +41,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Department.Title)
             </td>
-                @if (User.IsInRole("Admin"))
-                {
+              
+                
             <td>
-                   
+                    @if (User.IsInRole("Admin"))
+                        {
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@item.SubjectId">Edit</a> |
 
-                <a asp-action="Edit" asp-route-id="@item.SubjectId">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.SubjectId">Delete</a> |
 
+                        </span>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.SubjectId">Details</a>
 
-
-
-                <a asp-action="Details" asp-route-id="@item.SubjectId"> Details</a> |
-
-                    
-                   
-                <a asp-action="Delete" asp-route-id="@item.SubjectId">Delete</a>
-                    
             </td>
-                }
+               
                 
         </tr>
 }

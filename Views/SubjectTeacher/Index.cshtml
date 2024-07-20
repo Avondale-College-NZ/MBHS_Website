@@ -44,14 +44,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Subject.Title)
             </td>
-                @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
-                {
+              
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SubjectTeacherId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SubjectTeacherId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SubjectTeacherId">Delete</a>
+                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                    {
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@item.SubjectTeacherId">Edit</a> |
+                
+                        <a asp-action="Delete" asp-route-id="@item.SubjectTeacherId">Delete</a> |
+                          
+                        </span>
+                    }
+                        <a asp-action="Details" asp-route-id="@item.SubjectTeacherId">Details</a> 
+                       
             </td>
-                }
+               
         </tr>
 }
     </tbody>

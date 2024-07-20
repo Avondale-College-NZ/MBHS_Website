@@ -79,7 +79,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Department/Details/5
-        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Department == null)

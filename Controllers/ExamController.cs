@@ -80,7 +80,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Exam/Details/5
-        [Authorize(Roles = "Admin,Manager")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Exam == null)

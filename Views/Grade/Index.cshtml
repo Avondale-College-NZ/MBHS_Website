@@ -54,14 +54,21 @@
             <td>
                     @Html.DisplayFor(modelItem => item.Student.FirstName) @Html.DisplayFor(modelItem => item.Student.LastName)
             </td>
-                @if (User.IsInRole("User") || User.IsInRole("Manager") || User.IsInRole("Admin"))
-                {
+             
+                
             <td>
-                <a asp-action="Edit" asp-route-id="@item.GradeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GradeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GradeId">Delete</a>
+                    @if (User.IsInRole("User") || User.IsInRole("Manager") || User.IsInRole("Admin"))
+                        {
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@item.GradeId">Edit</a> |
+
+                            <a asp-action="Delete" asp-route-id="@item.GradeId">Delete</a> |
+
+                        </span>
+                        }
+                    <a asp-action="Details" asp-route-id="@item.GradeId">Details</a>
             </td>
-                }
+               
         </tr>
 }
     </tbody>

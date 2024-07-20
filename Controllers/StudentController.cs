@@ -84,7 +84,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: Students/Details/5
-        [Authorize(Roles = "Admin,Manager")]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Student == null)
