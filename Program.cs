@@ -76,6 +76,8 @@ namespace MBHS_Website
                     await userManager.CreateAsync(user, password);
 
                     await userManager.AddToRoleAsync(user, "Admin");
+                    await userManager.AddToRoleAsync(user, "Manager");
+                        await userManager.AddToRoleAsync(user, "User");
                 }
 
             }
