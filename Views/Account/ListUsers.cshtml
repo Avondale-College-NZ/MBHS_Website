@@ -31,6 +31,7 @@
 
     foreach (var user in Model)
     {
+        @if (user.Email != "principal@mbhs.com") {
         <div class="card mb-3">
             <div class="card-header">
                 User Id : @user.Id
@@ -63,6 +64,7 @@
                 </form>
             </div>
         </div>
+        }
     }
     }
 else
