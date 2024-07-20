@@ -6,7 +6,7 @@ namespace MBHS_Website.Models
 	{
 		public int GradeId { get; set; }
 
-        //set annotation for grade out of 100
+        //Validation through data annotation to only allow a grade as percentage between 0 and 100
         [Range(0,100, ErrorMessage = "Please enter a valid value between 0 and 100")]
         public int Mark { get; set; }
 		public int ExamId { get; set; }
