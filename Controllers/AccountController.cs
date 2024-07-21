@@ -71,29 +71,38 @@ namespace MBHS_Website.Controllers
             }
             else
             {
-                //If the User Exists, then proceed and update the data
-                //Populate the user instance with the data from EditUserViewModel
-                user.Email = model.Email;
-                user.UserName = model.UserName;
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                user.DateOfBirth = model.DateOfBirth;
-                //UpdateAsync Method will update the user data in the AspNetUsers Identity table
-                var result = await _userManager.UpdateAsync(user);
-                if (result.Succeeded)
+                if (!ModelState.IsValid)
                 {
-                    //Once user data updated redirect to the ListUsers view
-                    return RedirectToAction("ListUsers");
+                    return View(model);
                 }
                 else
                 {
-                    //In case any error, stay in the same view and show the model validation error
-                    foreach (var error in result.Errors)
+
+
+                    //If the User Exists, then proceed and update the data
+                    //Populate the user instance with the data from EditUserViewModel
+                    user.Email = model.Email;
+                    user.UserName = model.UserName;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.DateOfBirth = model.DateOfBirth;
+                    //UpdateAsync Method will update the user data in the AspNetUsers Identity table
+                    var result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", error.Description);
+                        //Once user data updated redirect to the ListUsers view
+                        return RedirectToAction("ListUsers");
                     }
+                    else
+                    {
+                        //In case any error, stay in the same view and show the model validation error
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
+                    return View(model);
                 }
-                return View(model);
             }
         }
 

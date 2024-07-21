@@ -133,7 +133,7 @@ namespace MBHS_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SubjectTeacherId,SubjectId,TeacherId,Room")] SubjectTeacher subjectTeacher)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _context.Add(subjectTeacher);
                 await _context.SaveChangesAsync();
@@ -189,7 +189,7 @@ namespace MBHS_Website.Controllers
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {

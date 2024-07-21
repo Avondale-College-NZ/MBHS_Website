@@ -107,7 +107,7 @@ namespace MBHS_Website.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await LoadAsync(user);
                 return Page();
@@ -145,7 +145,7 @@ namespace MBHS_Website.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await LoadAsync(user);
                 return Page();
