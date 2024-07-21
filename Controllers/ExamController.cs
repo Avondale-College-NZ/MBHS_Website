@@ -120,7 +120,7 @@ namespace MBHS_Website.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId", exam.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "Title", exam.SubjectId);
             return View(exam);
         }
 
@@ -174,7 +174,7 @@ namespace MBHS_Website.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "SubjectId", exam.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Set<Subject>(), "SubjectId", "Title", exam.SubjectId);
             return View(exam);
         }
 

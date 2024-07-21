@@ -28,7 +28,7 @@ public class Teacher : IdentityUser
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime DateOfBirth { get; set; }
 
-    public ICollection<SubjectTeacher> SubjectTeachers { get; set; }
+    public ICollection<SubjectTeacher>? SubjectTeachers { get; set; }
 
 }
 

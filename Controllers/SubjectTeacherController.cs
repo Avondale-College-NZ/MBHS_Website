@@ -139,8 +139,21 @@ namespace MBHS_Website.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", subjectTeacher.SubjectId);
-            ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "UserName", subjectTeacher.TeacherId);
+            var Teacher = _context.Users
+                                .Select(s => new
+                                {
+                                    Text = s.FirstName + " " + s.LastName,
+                                    Value = s.Id
+
+                                }
+                                );
+
+
+
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "Title", subjectTeacher.SubjectId);
+
+            //ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "FirstName");
+            ViewData["TeacherId"] = new SelectList(Teacher, "Value", "Text", subjectTeacher.TeacherId);
             return View(subjectTeacher);
         }
 
@@ -209,8 +222,21 @@ namespace MBHS_Website.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", subjectTeacher.SubjectId);
-            ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "UserName", subjectTeacher.TeacherId);
+            var Teacher = _context.Users
+                                .Select(s => new
+                                {
+                                    Text = s.FirstName + " " + s.LastName,
+                                    Value = s.Id
+
+                                }
+                                );
+
+
+
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "Title", subjectTeacher.SubjectId);
+
+            //ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "FirstName");
+            ViewData["TeacherId"] = new SelectList(Teacher, "Value", "Text", subjectTeacher.TeacherId);
             return View(subjectTeacher);
         }
 

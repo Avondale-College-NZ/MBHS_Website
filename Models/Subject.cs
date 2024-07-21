@@ -13,7 +13,7 @@ namespace MBHS_Website.Models
         [Required]
         public int DepartmentId { get; set; }
 		public Department? Department { get; set; }
-		public ICollection<Exam> Exams { get; set;}
-		public ICollection<SubjectTeacher> SubjectTeachers { get; set; }	
+		public ICollection<Exam>? Exams { get; set;}
+		public ICollection<SubjectTeacher>? SubjectTeachers { get; set; }	
 	}
 }

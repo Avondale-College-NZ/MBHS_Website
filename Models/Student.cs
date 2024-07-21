@@ -22,7 +22,7 @@ namespace MBHS_Website.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
-		public ICollection<Grade> Grades { get; set; }
-		public ICollection<StudentSubjectTeacher> StudentSubjectTeachers { get; set; }
+		public ICollection<Grade>? Grades { get; set; }
+		public ICollection<StudentSubjectTeacher>? StudentSubjectTeachers { get; set; }
 	}
 }

@@ -160,8 +160,28 @@ namespace MBHS_Website.Controllers
                 
 
             }
-            ViewData["ExamId"] = new SelectList(_context.Exam, "ExamId", "ExamId", grade.ExamId);
-            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
+
+
+            var Exam = _context.Exam.Include(u => u.Subject)
+            .Select(s => new
+            {
+                Text = s.Subject.Title + " | " + s.Date.ToString().Remove(s.Date.ToString().Length - 16),
+                Value = s.ExamId
+
+            }
+                                );
+            var Student = _context.Student
+                                .Select(s => new
+                                {
+                                    Text = s.FirstName + " " + s.LastName,
+                                    Value = s.StudentId
+
+                                }
+                                );
+
+            ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
             return View(grade);
 
 
@@ -238,8 +258,28 @@ namespace MBHS_Website.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ExamId"] = new SelectList(_context.Exam, "ExamId", "ExamId", grade.ExamId);
-            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
+
+            var Exam = _context.Exam.Include(u => u.Subject)
+                             .Select(s => new
+                             {
+                                 Text = s.Subject.Title + " | " + s.Date.ToString().Remove(s.Date.ToString().Length - 16),
+                                 Value = s.ExamId
+
+                             }
+                             );
+            var Student = _context.Student
+                                .Select(s => new
+                                {
+                                    Text = s.FirstName + " " + s.LastName,
+                                    Value = s.StudentId
+
+                                }
+                                );
+
+            ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
+
             return View(grade);
         }
 

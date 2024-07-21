@@ -18,6 +18,6 @@ namespace MBHS_Website.Models
 
 		public Subject? Subject { get; set; }
 
-		public ICollection<StudentSubjectTeacher> StudentSubjectTeachers { get; set; }
+		public ICollection<StudentSubjectTeacher>? StudentSubjectTeachers { get; set; }
     }
 }

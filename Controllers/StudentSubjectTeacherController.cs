@@ -149,8 +149,27 @@ namespace MBHS_Website.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", studentSubjectTeacher.StudentId);
-            ViewData["SubjectTeacherId"] = new SelectList(_context.Set<SubjectTeacher>(), "SubjectTeacherId", "SubjectTeacherId", studentSubjectTeacher.SubjectTeacherId);
+            var SubjectTeacher = _context.SubjectTeacher.Include(u => u.Subject).Include(u => u.Teacher)
+                                .Select(s => new
+                                {
+                                    Text = s.Subject.Title + " | " + s.Teacher.FirstName + " " + s.Teacher.LastName,
+                                    Value = s.SubjectTeacherId
+
+                                }
+                                );
+
+
+            var Student = _context.Student
+                               .Select(s => new
+                               {
+                                   Text = s.FirstName + " " + s.LastName,
+                                   Value = s.StudentId
+
+                               }
+                               );
+
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", studentSubjectTeacher.StudentId);
+            ViewData["SubjectTeacherId"] = new SelectList(SubjectTeacher, "Value", "Text", studentSubjectTeacher.SubjectTeacherId);
             return View(studentSubjectTeacher);
         }
 
@@ -226,8 +245,27 @@ namespace MBHS_Website.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", studentSubjectTeacher.StudentId);
-            ViewData["SubjectTeacherId"] = new SelectList(_context.Set<SubjectTeacher>(), "SubjectTeacherId", "SubjectTeacherId", studentSubjectTeacher.SubjectTeacherId);
+            var SubjectTeacher = _context.SubjectTeacher.Include(u => u.Subject).Include(u => u.Teacher)
+                                  .Select(s => new
+                                  {
+                                      Text = s.Subject.Title + " | " + s.Teacher.FirstName + " " + s.Teacher.LastName,
+                                      Value = s.SubjectTeacherId
+
+                                  }
+                                  );
+
+
+            var Student = _context.Student
+                               .Select(s => new
+                               {
+                                   Text = s.FirstName + " " + s.LastName,
+                                   Value = s.StudentId
+
+                               }
+                               );
+
+            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", studentSubjectTeacher.StudentId);
+            ViewData["SubjectTeacherId"] = new SelectList(SubjectTeacher, "Value", "Text", studentSubjectTeacher.SubjectTeacherId);
             return View(studentSubjectTeacher);
         }
 

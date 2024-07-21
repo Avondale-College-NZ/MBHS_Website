@@ -14,6 +14,6 @@ namespace MBHS_Website.Models
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         
         public string Building { get; set; }
-        public ICollection<Subject> Subjects { get; set; }
+        public ICollection<Subject>? Subjects { get; set; }
     }
 }
