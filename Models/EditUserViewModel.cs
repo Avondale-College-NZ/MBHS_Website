@@ -14,7 +14,7 @@ namespace MBHS_Website.Models
             {
                 Roles = new List<string>();
             }
-
+            
             [Required]
             public string Id { get; set; }
 
@@ -26,12 +26,17 @@ namespace MBHS_Website.Models
             [EmailAddress]
             public string Email { get; set; }
 
-            [Display(Name = "First Name")]
+        [RegularExpression(@"[a-zA-ZāàáâäãåąčćęèéêëėįìíîïłńōòóôöõøùúûüųūÿýżźñçčšžæĀÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'\-\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+        [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-            [Display(Name = "Last Name")]
+        [RegularExpression(@"[a-zA-ZāàáâäãåąčćęèéêëėįìíîïłńōòóôöõøùúûüųūÿýżźñçčšžæĀÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'\-\s]{1,40}$", ErrorMessage = "Enter a valid name")]
+        [Display(Name = "Last Name")]
             public string LastName { get; set; }
-            public DateTime DateOfBirth { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
 
             public IList<string> Roles { get; set; }
         }
