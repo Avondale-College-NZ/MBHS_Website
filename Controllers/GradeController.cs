@@ -151,25 +151,16 @@ namespace MBHS_Website.Controllers
         public async Task<IActionResult> Create([Bind("GradeId,Mark,ExamId,StudentId")] Grade grade)
         {
 
-            
-            if (ModelState.IsValid)
-            {
-                _context.Add(grade);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-                
-
-            }
-
-
+            var SST = _context.StudentSubjectTeacher.Include(v => v.SubjectTeacher).ToList();
+            var exams = _context.Exam.ToList();
             var Exam = _context.Exam.Include(u => u.Subject)
-            .Select(s => new
-            {
-                Text = s.Subject.Title + " | " + s.Date.ToString().Remove(s.Date.ToString().Length - 16),
-                Value = s.ExamId
+                            .Select(s => new
+                            {
+                                Text = s.Subject.Title + " | " + s.Date.ToString().Remove(s.Date.ToString().Length - 16),
+                                Value = s.ExamId
 
-            }
-                                );
+                            }
+                                                );
             var Student = _context.Student
                                 .Select(s => new
                                 {
@@ -179,12 +170,40 @@ namespace MBHS_Website.Controllers
                                 }
                                 );
 
+            foreach (var student in SST)
+            {
+                if (student.StudentId == grade.StudentId)
+                {
+                    foreach (var e in exams)
+                    {
+                        if (e.SubjectId == student.SubjectTeacher.SubjectId)
+                        {
+                            if (ModelState.IsValid)
+                            {
+                                _context.Add(grade);
+                                await _context.SaveChangesAsync();
+                                return RedirectToAction(nameof(Index));
+                            }
+                            else
+                            {
+
+                                ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+                                ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
+                                return View(grade);
+                            }
+                        }
+
+                    }
+                }
+            }
+            ModelState.AddModelError("CustomError", "* Chosen student does not take that particlar subject");
             ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
-            ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+                    ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
 
-            return View(grade);
-
-
+                    return View(grade);
+                
+  
         }
 
         // GET: Grade/Edit/5

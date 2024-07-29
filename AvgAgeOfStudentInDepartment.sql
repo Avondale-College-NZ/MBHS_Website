@@ -1,4 +1,5 @@
-﻿SELECT [D].[Title] AS [Department], CAST(AVG(CAST([Student].[DateOfBirth] AS FLOAT)) AS DATETIME) AS [Average Age]
+﻿SELECT [D].[Title] AS [Department],
+CAST(AVG(CAST([Student].[DateOfBirth] AS FLOAT)) AS DATETIME) AS [Average Age]
 FROM [dbo].[StudentSubjectTeacher] AS [SST]
 INNER JOIN [dbo].[SubjectTeacher] AS [ST]
 ON [ST].[SubjectTeacherId] = [SST].[SubjectTeacherId]
