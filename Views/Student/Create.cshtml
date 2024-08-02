@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label">Date Of Birth</label>
-                <input asp-for="DateOfBirth" class="form-control" type="date" max="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+                <input asp-for="DateOfBirth" class="form-control" type="date" max="@DateTime.Now.AddYears(-10).ToString("yyyy-MM-dd")" min="@DateTime.Now.AddYears(-25).ToString("yyyy-MM-dd")" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <br />
