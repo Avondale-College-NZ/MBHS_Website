@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MBHS_Website.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles ="Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<Teacher> _signInManager;

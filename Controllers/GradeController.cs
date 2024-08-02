@@ -202,8 +202,6 @@ namespace MBHS_Website.Controllers
                     ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
 
                     return View(grade);
-                
-  
         }
 
         // GET: Grade/Edit/5
