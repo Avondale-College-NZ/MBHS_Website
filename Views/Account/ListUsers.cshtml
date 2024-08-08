@@ -8,6 +8,7 @@
     ViewBag.Title = "All Users";
 }
 <script>
+
     function confirmDelete(uniqueId, isDeleteClicked) {
         var deleteSpan = 'deleteSpan_' + uniqueId;
         var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
@@ -19,7 +20,9 @@
             $('#' + confirmDeleteSpan).hide();
         }
     }
+
 </script>
+
 @if (Model.Any())
 {
 
@@ -54,11 +57,11 @@
                     <span id="confirmDeleteSpan_@user.Id" style="display:none">
                         <span>Are you sure you want to Delete?</span>
                         <button type="submit" class="btn btn-danger">Yes</button>
-                        <a href="#" class="btn btn-primary"
+                        <a href="#!" class="btn btn-primary"
                            onclick="confirmDelete('@user.Id', false)">No</a>
                     </span>
                     <span id="deleteSpan_@user.Id">
-                        <a href="#" class="btn btn-danger"
+                        <a href="#!" class="btn btn-danger"
                            onclick="confirmDelete('@user.Id', true)">Delete</a>
                     </span>
                 </form>
