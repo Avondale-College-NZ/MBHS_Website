@@ -33,4 +33,6 @@ public class MBHS_Context : IdentityDbContext<Teacher>
     public DbSet<MBHS_Website.Models.SubjectTeacher> SubjectTeacher { get; set; } = default!;
 
     public DbSet<MBHS_Website.Models.Department> Department { get; set; } = default!;
+
+    public DbSet<MBHS_Website.Models.News> News { get; set; } = default!;
 }

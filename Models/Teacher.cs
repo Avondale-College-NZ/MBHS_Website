@@ -29,6 +29,7 @@ public class Teacher : IdentityUser
     public DateTime DateOfBirth { get; set; }
 
     public ICollection<SubjectTeacher>? SubjectTeachers { get; set; }
+    public ICollection<News>? News { get; set; }
 
 }
 
