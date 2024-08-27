@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MBHS_Website.Areas.Identity.Data;
 using MBHS_Website.Models;
+using Microsoft.Identity;
+using System.Security.Claims;
 
 namespace MBHS_Website.Controllers
 {
@@ -59,8 +61,11 @@ namespace MBHS_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("NewsId,Title,Post,TeacherId,Date")] News news)
         {
+            news.Date = DateTime.Now;
+            news.TeacherId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (ModelState.IsValid)
             {
+                    
                 _context.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
