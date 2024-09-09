@@ -1,53 +1,107 @@
-﻿@model IEnumerable<MBHS_Website.Models.News>
+﻿ @model IEnumerable<MBHS_Website.Models.News>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Post)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                Teacher
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Post)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Teacher.FirstName) @Html.DisplayFor(modelItem => item.Teacher.LastName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NewsId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NewsId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NewsId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Events</title>
+    <style>
+/*         body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        } */
+        .event-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .event-item {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .event-item:hover {
+            background-color: #fce4e4; /* Light red on hover */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .event-title {
+            font-size: 1.5em;
+            color: #00205b;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            
+        }
+
+        .event-date {
+            color: #ff4d4d; /* Red color */
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .event-description {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul id="eventList" class="event-list">
+            @foreach (var item in Model)
+            {
+          
+                    int max = 10;
+                    int i = 0;
+                    string Test = "";
+
+          
+                    //     // inner text will strip out all html, and give us plain text
+                    string postText = item.Post;
+
+                    // we split by space to get all the words in this element
+                    string[] elementWords = postText.Split(new char[] { ' ' });
+
+                    foreach (string word in elementWords)
+                    {
+                        if (i < max)
+                        {
+                            i++;
+                            Test = Test + " " + word;
+                        }
+                    }
+                Test = Test + "...";
+         
+           <a asp-action="Details" asp-route-id="@item.NewsId">
+            <li class="event-item">
+                    <div class="event-title">@Html.DisplayFor(modelItem => item.Title)</div>
+                    <div class="event-date">@Html.DisplayFor(modelItem => item.Date)</div>
+                    <div class="event-description">@Test</div>
+                    
+
+                </li>
+                </a>
+            }
+        </ul>
+    </div>
+
+
+
+</body>
+</html>

@@ -9,6 +9,7 @@ using MBHS_Website.Areas.Identity.Data;
 using MBHS_Website.Models;
 using Microsoft.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MBHS_Website.Controllers
 {
@@ -48,6 +49,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: News/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["TeacherId"] = new SelectList(_context.Users, "Id", "Id");
@@ -75,6 +77,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: News/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.News == null)
@@ -128,6 +131,7 @@ namespace MBHS_Website.Controllers
         }
 
         // GET: News/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.News == null)

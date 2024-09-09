@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .event-item {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .event-title {
+            font-size: 2em;
+            color: #0033cc; /* Blue color */
+            margin: 0 0 10px 0;
+        }
+
+        .event-date {
+            color: #ff4d4d; /* Red color */
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .event-description {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #0033cc;
+            text-decoration: none;
+            border: 2px solid #0033cc;
+            border-radius: 4px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            .back-link:hover {
+                background-color: #0033cc;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="eventDetail" class="event-item">
+            <!-- Event details will be injected here by JavaScript -->
+        </div>
+        <a href="index.html" class="back-link">Back to Events List</a>
+    </div>
+
+    <script>
+        // Example data for recent events
+        const events = [
+            {
+                id: 1,
+                title: "Event 1",
+                date: "2024-08-15",
+                description: "A detailed description of the first event."
+            },
+            {
+                id: 2,
+                title: "Event 2",
+                date: "2024-08-20",
+                description: "A detailed description of the second event."
+            },
+            {
+                id: 3,
+                title: "Event 3",
+                date: "2024-08-25",
+                description: "A detailed description of the third event."
+            }
+        ];
+
+        // Function to get query parameter by name
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to render event details
+        function renderEventDetail() {
+            const eventId = parseInt(getQueryParam('id'), 10);
+            const event = events.find(e => e.id === eventId);
+            const detailElement = document.getElementById('eventDetail');
+            if (event) {
+                detailElement.innerHTML = `
+                            <div class="event-title">${event.title}</div>
+                            <div class="event-date">${event.date}</div>
+                            <div class="event-description">${event.description}</div>
+                        `;
+            } else {
+                detailElement.innerHTML = "<p>Event not found.</p>";
+            }
+        }
+
+        // Initialize the page by rendering the event details
+        renderEventDetail();
+    </script>
+</body>
+</html>

@@ -1,42 +1,88 @@
-﻿@model MBHS_Website.Models.News
-
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model MBHS_Website.Models.News
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+
+        .event-item {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);          
+        }
+
+        .event-title {
+            text-align: center;
+            font-size: 2.3em;
+            color: #00205b; /* Blue color */
+            margin: 20px 0 40px 0;
+        }
+
+      .event-date {
+            color: grey; /* Red color */
+            font-size: 1em;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: right;
+     
+      }
+
+        .event-writer {
+            color: #ed2939; /* Red color */
+            font-size: 1em;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+
+        .event-description {
+            color: #333;
+            line-height: 1.6;
+            font-size: 12;
+        }
+
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #0033cc;
+            text-decoration: none;
+            border: 2px solid #0033cc;
+            border-radius: 4px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+            .back-link:hover {
+                background-color: #0033cc;
+                color: white;
+            }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="eventDetail" class="event-item">
+            <div class="event-title">@Html.DisplayFor(model => model.Title)</div>
+            
+            <div class="event-description" style="white-space:  pre-line;">@Html.DisplayFor(model => model.Post)</div>
+            <div class="event-writer">@Html.DisplayFor(model => model.Teacher.FirstName) @Html.DisplayFor(model => model.Teacher.LastName)</div>
+            <div class="event-date">@Html.DisplayFor(model => model.Date)</div>
+            
+        </div>
+        <a asp-action="Index" class="back-link">Back to Events List</a>
+    </div>
+</body>
+</html>
 
 <div>
-    <h4>News</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Post)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Post)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Teacher.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a>
 </div>
