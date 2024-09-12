@@ -9,7 +9,7 @@
 <h4>News</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="NewsId" />
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Post" class="control-label"></label>
-                <textarea asp-for="Post" class="form-control"> </textarea>
+                <textarea asp-for="Post" class="form-control" style="min-height: 40vh;"> </textarea>
             @*  <input asp-for="Post" class="form-control" />  *@
                 <span asp-validation-for="Post" class="text-danger"></span>
             </div>

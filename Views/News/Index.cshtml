@@ -5,9 +5,7 @@
 }
 
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 
             <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +13,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recent Events</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <style>
+            @@keyframes up-enter {
+                0% {
+                    transform: translateY(-0px);
+                }
+
+                100% {
+                    transform: translateY(-60px);
+                }
+            }
+        </style>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                gsap.set('main', { y: -60 })
+
+                const uncover = gsap.timeline({ paused: true })
+
+                uncover
+                    .to('main', { y: -300, ease: 'none' })
+                    ;
+
+                ScrollTrigger.create({
+                    trigger: '.top-img',
+                    start: 'top 100px',
+                    end: '+=50%',
+                    animation: uncover,
+                    scrub: true,
+                });
+
+            });
+        </script>
+    }
+    else
+    {
+        <style>
+            @@keyframes up-enter {
+                0% {
+                    transform: translateY(-60px);
+                }
+
+                100% {
+                    transform: translateY(-120px);
+                }
+            }
+        </style>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                gsap.set('main', { y: -120 })
+
+                const uncover = gsap.timeline({ paused: true })
+
+                uncover
+                    .to('main', { y: -300, ease: 'none' })
+                    ;
+
+                ScrollTrigger.create({
+                    trigger: '.top-img',
+                    start: 'top 100px',
+                    end: '+=50%',
+                    animation: uncover,
+                    scrub: true,
+                });
+
+            });
+        </script>
+    }
     <style>
 /*         body {
             display: flex;
@@ -32,7 +104,7 @@
             border-radius: 8px;
             margin-bottom: 20px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         .event-item:hover {
@@ -56,13 +128,98 @@
         .event-description {
             color: #333;
         }
-        .container {
-            max-width: 800px;
+    
+
+
+
+        .body-container {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, rgba(219,222,233,1) 20%, rgba(233,221,221,1) 60%);
         }
+
+        main {
+            animation: 0.5s up-enter;
+           
+            padding: 5%;
+        
+            margin: auto;
+            max-width: 1000px;
+            min-height: 90vh;
+            border-radius: 20px;
+            position: relative;
+            margin-bottom: -320px;
+          
+        }
+      
+          
+
+        @@keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        section {
+            animation: 0.5s fade-in;
+            padding: 5% 0 5% 0;
+        }
+
+        h2 {
+            color: black;
+            font-weight: 500;
+        }
+
+        main p {
+            color: black; /* Adjust text color as needed */
+            font-family: "Noto Sans",sans-serif;
+        }
+
+
+        .top-img {
+            position: relative;
+            top: 0;
+            max-width: 100%;
+            width: 100vw;
+            height: 400px;
+            filter: brightness(.9);
+            object-fit: cover;
+            object-position: 60% 50%;
+        }
+
+        section {
+            border-bottom: 0.5px solid #373636;
+        }
+
+        .ending {
+            padding: 6% 0 0 0;
+            color: #272727;
+            font-style: italic;
+            text-align: center;
+        }
+
+        section img {
+            border-radius: 5px;
+            margin: 15px;
+            margin-top: 0;
+        }
+
+   
     </style>
+  
 </head>
-<body>
-    <div class="container">
+    <body class="sports-container">
+        <img class="top-img" src="~/images/MBHS news.png" />
+        <main>
+          @if (User.IsInRole("Admin")){
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+            }
         <ul id="eventList" class="event-list">
             @foreach (var item in Model)
             {
@@ -99,9 +256,7 @@
                 </a>
             }
         </ul>
-    </div>
 
-
-
+        </main>
 </body>
 </html>

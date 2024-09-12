@@ -82,7 +82,8 @@
     </div>
 </body>
 </html>
-
+  @if (User.IsInRole("Admin")){
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a>
 </div>
+  }
