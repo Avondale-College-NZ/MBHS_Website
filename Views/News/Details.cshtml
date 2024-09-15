@@ -79,11 +79,15 @@
             
         </div>
         <a asp-action="Index" class="back-link">Back to Events List</a>
+        <br/>
+        <br />
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a>
+            </div>
+        }
     </div>
 </body>
 </html>
-  @if (User.IsInRole("Admin")){
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a>
-</div>
-  }
+ 
