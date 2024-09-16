@@ -371,6 +371,16 @@
             min-height: 90vh;
             border-bottom: 1px solid #373636;
         }
+        .user {
+            color: black;
+            border: 2px solid #ed2939;
+            margin-top:-2px;
+            margin-left: 2px;
+            margin-right: -2px;
+            padding: 4px;
+            border-radius: 8px;
+
+        }
     </style>
 </head>
 
@@ -413,16 +423,15 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li>
-                        <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</a>
-                    </li>
-
-                    <li>
                         <a  asp-controller="Navigation" asp-action="Index">Navigation</a>
                     </li>
                     <li>
                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <button id="logout" type="submit">Logout</button>
                         </form>
+                    </li>
+                    <li class="user">
+                        @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName
                     </li>
 
                 }
