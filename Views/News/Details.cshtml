@@ -1,9 +1,10 @@
 ﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
 @model MBHS_Website.Models.News
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
+ 
 }
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,10 +82,21 @@
         <a asp-action="Index" class="back-link">Back to Events List</a>
         <br/>
         <br />
+        
         @if (User.IsInRole("Admin"))
         {
             <div>
-                <a asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a>
+                <span style="float:left; margin-right: 8px;">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.NewsId">Edit</a> </span> 
+                    <form asp-action="Delete" asp-route-id="@Model?.NewsId">
+                        <input type="hidden" asp-for="NewsId" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+              
+            </div>
+           
+            <div>
+              
             </div>
         }
     </div>

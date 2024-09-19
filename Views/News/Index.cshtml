@@ -208,7 +208,20 @@
             margin-top: 0;
         }
 
-   
+       .create-button {
+                border: 2px solid grey;
+                padding: 6px;
+                border-radius: 8px;
+                background: white;
+            transition: 0.2s;
+       }
+       .create-button:hover {
+                border: 2px solid #ed2939;
+                padding: 6px;
+                border-radius: 8px;
+                background: white;
+                
+       }
     </style>
   
 </head>
@@ -217,7 +230,7 @@
         <main>
           @if (User.IsInRole("Admin")){
         <p>
-            <a asp-action="Create">Create New</a>
+                <a class ="create-button" asp-action="Create">Create New</a>
         </p>
             }
         <ul id="eventList" class="event-list">
