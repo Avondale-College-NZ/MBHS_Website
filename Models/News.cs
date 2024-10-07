@@ -5,7 +5,9 @@ namespace MBHS_Website.Models
     public class News
     {
         public int NewsId { get; set; }
+        [StringLength(120, ErrorMessage = "Exceeded character limit.")]
         public string Title { get; set; }
+        [StringLength(3000, ErrorMessage = "Exceeded character limit.")]
         public string Post { get; set; }
         public string? TeacherId { get; set; }
         [DataType(DataType.Date)]
