@@ -3,7 +3,25 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        font-weight: bold;
+        color: #0033cc;
+        text-decoration: none;
+        border: 2px solid #0033cc;
+        border-radius: 4px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
+        .back-link:hover {
+            background-color: #0033cc;
+            color: white;
+        }
+
+</style>
 <h1>Subjects</h1>
 @if (User.IsInRole("Admin"))
 {
@@ -83,4 +101,7 @@
    class="btn btn-default @nextDisabled">
     Next
 </a>
+<div>
+    <a class="back-link" asp-area="" asp-controller="Navigation" asp-action="Index">Back to Navigation</a>
+</div>
 
