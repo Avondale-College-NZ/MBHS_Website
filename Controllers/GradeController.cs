@@ -10,6 +10,7 @@ using MBHS_Website.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Net.Mime.MediaTypeNames;
 using Microsoft.AspNetCore.Authorization;
+using System.Runtime.Intrinsics.X86;
 
 namespace MBHS_Website.Controllers
 {
@@ -176,27 +177,45 @@ namespace MBHS_Website.Controllers
                 {
                     foreach (var e in exams)
                     {
-                        if (e.SubjectId == student.SubjectTeacher.SubjectId)
+                        if (e.ExamId == grade.ExamId)
                         {
-                            if (ModelState.IsValid)
-                            {
-                                _context.Add(grade);
-                                await _context.SaveChangesAsync();
-                                return RedirectToAction(nameof(Index));
-                            }
-                            else
-                            {
 
-                                ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
-                                ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+                       
+                            if (e.SubjectId == student.SubjectTeacher.SubjectId)
+                            {
+                                if (ModelState.IsValid)
+                                {
+                                    if (e.Date < System.DateTime.Now)
+                                    {
+                                        _context.Add(grade);
+                                        await _context.SaveChangesAsync();
+                                        return RedirectToAction(nameof(Index));
+                                    }
+                                    else
+                                    {
+                                        ModelState.AddModelError("CustomError", "* Chosen exam has not yet been conducted");
+                                        ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+                                        ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
 
-                                return View(grade);
+                                        return View(grade);
+                                    }
+
+                                }
+                                else
+                                {
+                              
+                                        ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+                                        ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
+                                        return View(grade);
+                             
+                                }
                             }
                         }
-
                     }
                 }
             }
+            
             ModelState.AddModelError("CustomError", "* Chosen student does not take that particlar subject");
             ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
                     ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
@@ -249,32 +268,8 @@ namespace MBHS_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GradeId,Mark,ExamId,StudentId")] Grade grade)
         {
-            if (id != grade.GradeId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-          
-                try
-                {
-                    _context.Update(grade);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GradeExists(grade.GradeId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
+            var SST = _context.StudentSubjectTeacher.Include(v => v.SubjectTeacher).ToList();
+            var exams = _context.Exam.ToList();
 
             var Exam = _context.Exam.Include(u => u.Subject)
                              .Select(s => new
@@ -292,7 +287,60 @@ namespace MBHS_Website.Controllers
 
                                 }
                                 );
+            if (id != grade.GradeId)
+            {
+                return NotFound();
+            }
 
+           
+                   
+              
+            foreach (var student in SST)
+            {
+                if (student.StudentId == grade.StudentId)
+                {
+                    foreach (var e in exams)
+                    {
+                        if (e.ExamId == grade.ExamId)
+                        {
+
+
+                            if (e.SubjectId == student.SubjectTeacher.SubjectId)
+                            {
+                                if (ModelState.IsValid)
+                                {
+                                    if (e.Date < System.DateTime.Now)
+                                    {
+                                        _context.Update(grade);
+                                        await _context.SaveChangesAsync();
+                                        return RedirectToAction(nameof(Index));
+                                    }
+                                    else
+                                    {
+                                        ModelState.AddModelError("CustomError", "* Chosen exam has not yet been conducted");
+                                        ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+                                        ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
+                                        return View(grade);
+                                    }
+
+                                }
+                                else
+                                {
+
+                                    ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
+                                    ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
+
+                                    return View(grade);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ModelState.AddModelError("CustomError", "* Chosen student does not take that particlar subject");
             ViewData["ExamId"] = new SelectList(Exam, "Value", "Text", grade.ExamId);
             ViewData["StudentId"] = new SelectList(Student, "Value", "Text", grade.StudentId);
 
