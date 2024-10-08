@@ -11,8 +11,7 @@ namespace MBHS_Website.Models
         [RegularExpression(@"[a-zA-ZāàáâäãåąčćęèéêëėįìíîïłńōòóôöõøùúûüųūÿýżźñçčšžæĀÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'\-\s]{1,40}$", ErrorMessage = "Enter a valid name")]
         public string Title { get; set; }
         [Required]
-        [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
-        
+        [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]   
         public string Building { get; set; }
         public ICollection<Subject>? Subjects { get; set; }
     }
