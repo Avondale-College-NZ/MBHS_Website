@@ -94,6 +94,7 @@ namespace MBHS_Website.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
+            [StringLength(60, ErrorMessage = "Exceeds character limit")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
