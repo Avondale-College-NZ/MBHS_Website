@@ -170,8 +170,8 @@ namespace MBHS_Website.Controllers
 
                                 }
                                 );
-
-            foreach (var student in SST)
+            //sorts through all the subjects of each studnt and checks whether or not they take the particular subject that they are being graded for in the exam
+                foreach (var student in SST)
             {
                 if (student.StudentId == grade.StudentId)
                 {
@@ -185,7 +185,8 @@ namespace MBHS_Website.Controllers
                             {
                                 if (ModelState.IsValid)
                                 {
-                                    if (e.Date < System.DateTime.Now)
+                                        //checks whether the exam has already happened, because only then can a grade for it be registered
+                                        if (e.Date < System.DateTime.Now)
                                     {
                                         _context.Add(grade);
                                         await _context.SaveChangesAsync();
@@ -294,7 +295,7 @@ namespace MBHS_Website.Controllers
 
            
                    
-              
+            //sorts through all the subjects of each studnt and checks whether or not they take the particular subject that they are being graded for in the exam.
             foreach (var student in SST)
             {
                 if (student.StudentId == grade.StudentId)
@@ -309,6 +310,7 @@ namespace MBHS_Website.Controllers
                             {
                                 if (ModelState.IsValid)
                                 {
+                                    //checks whether the exam has already happened, because only then can a grade for it be registered
                                     if (e.Date < System.DateTime.Now)
                                     {
                                         _context.Update(grade);

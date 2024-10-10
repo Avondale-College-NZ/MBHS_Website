@@ -10,6 +10,7 @@ namespace MBHS_Website.Models
         [Required]
         [RegularExpression(@"[a-zA-ZāàáâäãåąčćęèéêëėįìíîïłńōòóôöõøùúûüųūÿýżźñçčšžæĀÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'\-\s]{1,40}$", ErrorMessage = "Enter a valid name")]
         public string Title { get; set; }
+        //data annotation to not allow more than 30 characters in the field
         [Required]
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]   
         public string Building { get; set; }

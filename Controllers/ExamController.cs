@@ -27,8 +27,7 @@ namespace MBHS_Website.Controllers
     int? pageNumber)
         {
 
-            ViewData["CurrentSort"] = sortOrder;
-           
+            ViewData["CurrentSort"] = sortOrder;         
             ViewData["SubjectSort"] = sortOrder == "Subject" ? "Subject_desc" : "Subject";
             ViewData["DateSort"] = sortOrder == "Date" ? "Date_desc" : "Date";
            
