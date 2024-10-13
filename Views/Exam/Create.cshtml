@@ -17,7 +17,7 @@
                 <select asp-for="SubjectId" class ="form-control" asp-items="ViewBag.SubjectId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
+                <label asp-for="Date" class="control-label"></label> @*validation to not allow for exams that happened more than 6 months in the past or are more than 1 yr away in the future, by setting min and max dates that are in relation to the current date*@
                 <input asp-for="Date" class="form-control" type="date" max="@DateTime.Now.AddYears(+1).ToString("yyyy-MM-dd")" min="@DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd")" /> 
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>

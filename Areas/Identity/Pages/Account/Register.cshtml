@@ -30,7 +30,7 @@
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-3">
+            <div class="form-floating mb-3"> @*validation to not allow for users who are an invalid age, by setting min and max dates that are in relation to the current date*@
                 <input asp-for="Input.DateOfBirth" class="form-control" aria-required="true" max="@DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd")" min="@DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd")" />
                 <label asp-for="Input.DateOfBirth">Date Of Birth</label>
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>

@@ -26,7 +26,7 @@ namespace MBHS_Website.Controllers
     string SearchString,
     int? pageNumber)
         {
-
+            //sortorders that connect the controller sort order to the view
             ViewData["CurrentSort"] = sortOrder;
             ViewData["RoomSort"] = sortOrder == "Room" ? "Room_desc" : "Room";
             ViewData["NameSort"] = sortOrder == "Name" ? "Name_desc" : "Name";
@@ -38,6 +38,7 @@ namespace MBHS_Website.Controllers
                 return Problem("Entity set 'MBHS_Website.SubjectTeacher'  is null.");
             }
 
+            //Filtering functionality
             if (SearchString != null)
             {
                 pageNumber = 1;
